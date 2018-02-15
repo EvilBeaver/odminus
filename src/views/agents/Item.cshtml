@@ -1,0 +1,19 @@
+<h2 class="ui dividing header">Агент кластера</h2>
+
+<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Идентификатор" class="ui form">
+    
+    <p class="field">
+        <label for="Идентификатор">Идентификатор</label>
+        <input name="Идентификатор" value="@Model?.Идентификатор"/>
+    </p>
+    <p class="field">
+        <label for="СетевоеИмя">Сетевое имя</label>
+        <input name="СетевоеИмя" value="@Model?.СетевоеИмя"/>
+    </p>
+    <p class="field">
+        <label for="Порт">Порт</label>
+        <input name="Порт" value="@Model?.Порт"/>
+    </p>
+    
+    <button type="submit" class="ui primary button">Сохранить</button>
+</form>
