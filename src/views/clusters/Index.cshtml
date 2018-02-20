@@ -3,18 +3,18 @@
 <table class="ui basic selectable table">
 <thead>
     <tr>
+        <th>Наименование</th>
         <th>Сервер</th>
         <th>Служба</th>
-        <th>Наименование</th>
         <th>Порт</th>
     </tr>
 </thead>
 <tbody>
     @foreach(var row in Model) {
         <tr>
+            <td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.ИмяКластера</a></td>
             <td><a asp-controller="servers" asp-action="edit" asp-route-id="@row.ИдентификаторСервера">@row.НаименованиеСервера</a></td>
             <td><a asp-controller="services" asp-action="edit" asp-route-id="@row.ИдентификаторСлужбы">@row.НаименованиеСервера:@row.Порт</a></td>
-            <td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.ИмяКластера</a></td>
             <td>@row.Порт</td>
         </tr>
     }

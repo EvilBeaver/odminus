@@ -1,0 +1,56 @@
+<h2 class="ui dividing header">Кластер: @Model?.НаименованиеСервера/@Model?.ИмяКластера:@Model?.Порт</h2>
+
+<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Идентификатор" class="ui form">
+    <p class="field">
+        <label for="Сервер">Сервер</label>
+        <a asp-controller="servers" asp-action="edit" asp-route-id="@Model?.ИдентификаторСервера">@Model?.НаименованиеСервера</a>
+    </p>
+    <p class="field">
+        <label for="Сервер">Идентификатор службы</label>
+        <a asp-controller="services" asp-action="edit" asp-route-id="@Model?.ИдентификаторСлужбы">@Model?.ИдентификаторСлужбы</a>
+    </p>
+    <p class="field">
+        <label for="Идентификатор">Идентификатор</label>
+        <a>@Model?.Идентификатор</a>
+    </p>
+    <p class="field">
+        <label for="ИмяКластера">Имя кластера</label>
+        <input name="ИмяКластера" value="@Model?.ИмяКластера" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="Компьютер">Компьютер</label>
+        <input name="Компьютер" value="@Model?.Компьютер" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="Порт">Порт</label>
+        <input name="Порт" value="@Model?.Порт" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="РП_ИнтервалПерезапуска">Интервал перезапуска</label>
+        <input name="РП_ИнтервалПерезапуска" value="@Model?.РП_ИнтервалПерезапуска" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="РП_ДопустимыйОбъемПамяти">Допустимый объем памяти</label>
+        <input name="РП_ДопустимыйОбъемПамяти" value="@Model?.РП_ДопустимыйОбъемПамяти" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="РП_ИнтервалПревышенияДопустимогоОбъемаПамяти">Интервал превышения допустимого объема памяти</label>
+        <input name="РП_ИнтервалПревышенияДопустимогоОбъемаПамяти" value="@Model?.РП_ИнтервалПревышенияДопустимогоОбъемаПамяти" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="РП_ДопустимоеОтклонениеКоличестваОшибокСервера">Допустимое отклонение количества ошибок сервера</label>
+        <input name="РП_ДопустимоеОтклонениеКоличестваОшибокСервера" value="@Model.РП_ДопустимоеОтклонениеКоличестваОшибокСервера" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="ВыключенныеПроцессыОстанавливатьЧерез">Выключенные процессы останавливать через</label>
+        <input name="ВыключенныеПроцессыОстанавливатьЧерез" value="@Model.ВыключенныеПроцессыОстанавливатьЧерез" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="УровеньОтказоустойчивойсти">Уровень отказоустойчивости</label>
+        <input name="УровеньОтказоустойчивойсти" value="@Model.УровеньОтказоустойчивойсти" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="РежимРаспределенияНагрузки">Режим распределения нагрузки</label>
+        <input name="РежимРаспределенияНагрузки" value="@Model.РежимРаспределенияНагрузки" readonly="readonly"/>
+    </p>
+</form>

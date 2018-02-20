@@ -22,7 +22,7 @@
             <td>@row.СетевойАдрес</td>
             <td>@row.Модель</td>
             <td>@row.ДатаОбновленияДанных</td>
-            <td><a asp-action="delete" asp-route-id="@row.Идентификатор"><i class="remove icon"></i></a></td>
+            <td><a href="@Url.Action("delete", "servers", new { id = @row.Идентификатор })" onclick="return confirm('Все данные сервера: @row.НаименованиеПолное будут удалены.\nПродолжить?')"><i class="remove icon"></i></a></td>
         </tr>
     }
 </tbody>
