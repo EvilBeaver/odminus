@@ -1,0 +1,107 @@
+<h2 class="ui dividing header">Сервер: @Model?.НаименованиеПолное</h2>
+
+<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Идентификатор" class="ui form">
+    
+    <p class="field">
+        <label for="Идентификатор">Идентификатор</label>
+        <a>@Model?.Идентификатор</a>
+    </p>
+    <p class="field">
+        <label for="НаименованиеПолное">Полное наименование</label>
+        <input name="НаименованиеПолное" value="@Model?.НаименованиеПолное" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="Наименование">Наименование</label>
+        <input name="Наименование" value="@Model?.Наименование" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="Домен">Домен</label>
+        <input name="Домен" value="@Model?.Домен" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="ОС">ОС</label>
+        <input name="ОС" value="@Model?.ОС" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="СетевойАдрес">IP Адрес</label>
+        <input name="СетевойАдрес" value="@Model?.СетевойАдрес" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="РежимЭнергосбережения">Схема электропитания</label>
+        <input name="РежимЭнергосбережения" value="@Model?.РежимЭнергосбережения" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="Модель">Модель</label>
+        <input name="Модель" value="@Model?.Модель" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="ДатаОбновленияДанных">Дата обновления данных</label>
+        <input name="ДатаОбновленияДанных" value="@Model?.ДатаОбновленияДанных" readonly="readonly"/>
+    </p>
+    <table class="ui basic table">
+    <thead>
+        <tr>
+            <th>Процессор</th>
+            <th>Частота</th>
+            <th>Количество ядер</th>
+            <th>Количество логических процессоров</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var row in Model.ДанныеПроцессора) {
+            <tr>
+                <td>@row.Процессор</td>
+                <td>@row.Процессор_Частота</td>
+                <td>@row.Процессор_КоличествоЯдер</td>
+                <td>@row.Процессор_КоличествоЛогическихПроцессоров</td>
+            </tr>
+        }
+    </tbody>
+    </table>
+    <h3>Службы 1С - <u>@Model.СписокСлужб.count()</u></h3>
+
+    <table class="ui basic selectable table">
+    <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Состояние</th>
+            <th>Порт</th>
+            <th>Диапазон портов</th>
+            <th>Версия</th>
+            <th>Режим отладки</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var row in Model.СписокСлужб) {
+            <tr>
+                <td><a asp-action="edit" asp-controller="services" asp-route-id="@row.Идентификатор">@row.НаименованиеОтображаемое</a></td>
+                <td>@row.Состояние</td>
+                <td>@row.Порт</td>
+                <td>@row.ДиапазонПортов</td>
+                <td>@row.Версия</td>
+                <td>@row.РежимОтладки</td>
+            </tr>
+        }
+    </tbody>
+    </table>
+    <h3>Кластеры 1С - <u>@Model.СписокКластеров.count()</u></h3>
+
+    <table class="ui basic selectable table">
+    <thead>
+        <tr>
+            <th>Служба</th>
+            <th>Наименование</th>
+            <th>Порт</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var row in Model.СписокКластеров) {
+            <tr>
+                <td><a asp-controller="services" asp-action="edit" asp-route-id="@row.ИдентификаторСлужбы">@row.НаименованиеСервера:@row.Порт</a></td>
+                <td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.ИмяКластера</a></td>
+                <td>@row.Порт</td>
+            </tr>
+        }
+    </tbody>
+    </table>
+</form>

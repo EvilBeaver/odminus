@@ -1,0 +1,29 @@
+<h1>Службы 1С - <u>@Model.count()</u></h1>
+
+<table class="ui basic selectable table">
+<thead>
+    <tr>
+        <th>Сервер</th>
+        <th>Наименование</th>
+        <th>Состояние</th>
+        <th>Порт</th>
+        <th>Диапазон портов</th>
+        <th>Версия</th>
+        <th>Режим отладки</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach(var row in Model) {
+        <tr>
+            <!--<td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.Идентификатор</a></td> -->
+            <td><a asp-controller="servers" asp-action="edit" asp-route-id="@row.ИдентификаторСервера">@row.НаименованиеСервера</a></td>
+            <td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.НаименованиеОтображаемое</a></td>
+            <td>@row.Состояние</td>
+            <td>@row.Порт</td>
+            <td>@row.ДиапазонПортов</td>
+            <td>@row.Версия</td>
+            <td>@row.РежимОтладки</td>
+        </tr>
+    }
+</tbody>
+</table>

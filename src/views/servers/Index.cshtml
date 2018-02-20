@@ -1,0 +1,29 @@
+<h1>Серверы - <u>@Model.count()</u></h1>
+
+<table class="ui basic selectable table">
+<thead>
+    <tr>
+        <th>Имя</th>
+        <th>Домен</th>
+        <th>ОС</th>
+        <th>IP</th>
+        <th>Модель</th>
+        <th>Дата обновления данных</th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+    @foreach(var row in Model) {
+        <tr>
+            <!--<td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.Идентификатор</a></td> -->
+            <td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.НаименованиеПолное</a></td>
+            <td>@row.Домен</td>
+            <td>@row.ОС</td>
+            <td>@row.СетевойАдрес</td>
+            <td>@row.Модель</td>
+            <td>@row.ДатаОбновленияДанных</td>
+            <td><a asp-action="delete" asp-route-id="@row.Идентификатор"><i class="remove icon"></i></a></td>
+        </tr>
+    }
+</tbody>
+</table>

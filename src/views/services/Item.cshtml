@@ -1,0 +1,64 @@
+<h2 class="ui dividing header">Служба: @Model?.НаименованиеОтображаемое</h2>
+
+<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Идентификатор" class="ui form">
+    <p class="field">
+        <label for="Сервер">Сервер</label>
+        <a asp-controller="servers" asp-action="edit" asp-route-id="@Model?.ИдентификаторСервера">@Model?.НаименованиеСервера</a>
+    </p>
+    <p class="field">
+        <label for="Идентификатор">Идентификатор</label>
+        <a>@Model?.Идентификатор</a>
+    </p>
+    <p class="field">
+        <label for="Наименование">Наименование</label>
+        <input name="Наименование" value="@Model?.Наименование" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="НаименованиеОтображаемое">Наименование отображаемое</label>
+        <input name="НаименованиеОтображаемое" value="@Model?.НаименованиеОтображаемое" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="Состояние">Состояние</label>
+        <input name="Состояние" value="@Model?.Состояние" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="Порт">Порт</label>
+        <input name="Порт" value="@Model?.Порт" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="ДиапазонПортов">Диапазон портов</label>
+        <input name="ДиапазонПортов" value="@Model?.ДиапазонПортов" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="Версия">Версия</label>
+        <input name="Версия" value="@Model?.Версия" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="ПутьКНастройкам">Путь к настройкам</label>
+        <input name="ПутьКНастройкам" value="@Model?.ПутьКНастройкам" readonly="readonly"/>
+    </p>
+    <p class="field">
+        <label for="РежимОтладки">Режим отладки</label>
+        <input name="РежимОтладки" value="@Model.РежимОтладки.ToString()" readonly="readonly"/>
+    </p>
+    <h3>Кластеры 1С - <u>@Model.СписокКластеров.count()</u></h3>
+
+    <table class="ui basic selectable table">
+    <thead>
+        <tr>
+            <th>Сервер</th>
+            <th>Наименование</th>
+            <th>Порт</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var row in Model.СписокКластеров) {
+            <tr>
+                <td><a asp-controller="servers" asp-action="edit" asp-route-id="@row.ИдентификаторСервера">@row.НаименованиеСервера</a></td>
+                <td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.ИмяКластера</a></td>
+                <td>@row.Порт</td>
+            </tr>
+        }
+    </tbody>
+    </table>
+</form>

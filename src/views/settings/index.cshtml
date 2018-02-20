@@ -1,0 +1,31 @@
+<h1>Настройки администрирования</h1>
+<h2>Список доступных RAC</h2>
+
+<div id="cmdbar" class="ui buttons">
+    <a asp-action="scanRAC" class="ui primary button">Сканировать</a>
+</div>
+<div id="cmdbar" class="ui buttons">
+    <a asp-action="add" class="ui primary button">Добавить</a>
+</div>
+
+<table class="ui basic selectable table">
+<thead>
+    <tr>
+        <th>Версия</th>
+        <th>Путь</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach(var row in Model) {
+        <tr>
+            <td>@row.Версия</td>
+            <td>@row.Путь</td>
+            <td>
+                <div id="cmdbar" class="ui buttons">
+                    <a asp-action="add" class="ui delete button">Удалить</a>
+                </div>
+            </td>
+        </tr>
+    }
+</tbody>
+</table>

@@ -1,1 +1,20 @@
-<div>Hello World (from the view)</div>
+<h1>Общие сведения</h1>
+
+<h2>Таблица показателей</h2>
+
+<table class="ui basic table">
+<thead>
+    <tr>
+        <th>Показатель</th>
+        <th>Значение</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach(var row in Model) {
+        <tr>
+            <td>@row.Ключ</td>
+            <td>@row.Значение</td>
+        </tr>
+    }
+</tbody>
+</table>

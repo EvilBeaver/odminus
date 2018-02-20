@@ -7,9 +7,44 @@
     <link rel="stylesheet" href="~/default.css"/>
 </head>
 <body>
+    @{
+        var thisControl = ViewContext.RouteData.Values["controller"].ToString();
+        
+        string serverClass = "";
+        string serviceClass = "";
+        string clusterClass = "";
+        string workserverClass = "";
+        string infobaseClass = "";
+
+        if (thisControl == "servers"){
+            serverClass = "item active";
+        } else {
+            serverClass = "item";
+        }
+        if (thisControl == "services"){
+            serviceClass = "item active";
+        } else {
+            serviceClass = "item";
+        }
+        if (thisControl == "clusters"){
+            clusterClass = "item active";
+        } else {
+            clusterClass = "item";
+        }
+        if (thisControl == "workservers"){
+            workserverClass = "item active";
+        } else {
+            workserverClass = "item";
+        }
+        if (thisControl == "infobases"){
+            infobaseClass = "item active";
+        } else {
+            infobaseClass = "item";
+        }
+    }
     <!-- top menu -->
     <div class="ui inverted huge borderless fluid menu">
-      <a class="header item">Odminus</a>
+      <a class="header item" asp-controller="home" asp-action="index">Odminus</a>
       <div class="right menu">
         <a class="item">Настройки</a>
         <a class="item">Помощь</a>
@@ -18,12 +53,13 @@
     <div class="ui grid">
         <div class="row">
             <div class="three wide column" id="sidebar">
-                <div class="ui secondary vertical fluid menu">
-                    <a class="item active" asp-controller="agents" asp-action="index">Агенты серверов</a>
+                <div class="ui secondary vertical fluid menu">              
+                    <a class=@serverClass asp-controller="servers" asp-action="index"> Серверы</a>
+                    <a class=@serviceClass asp-controller="services" asp-action="index">Службы 1С</a>
+                    <a class=@clusterClass asp-controller="clusters" asp-action="index">Кластеры 1С</a>
+                    <a class=@workserverClass>Рабочие серверы 1С</a>
                     <div class="ui hidden divider"></div>
-                    <a class="item">Информационные базы</a>
-                    <a class="item">Администраторы</a>
-                    <a class="item">Блокировки</a>
+                    <a class=@infobaseClass>Информационные базы</a>
                 </div>
             </div>
             <div class="twelve wide column" id="content">
