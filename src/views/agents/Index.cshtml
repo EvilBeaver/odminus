@@ -4,6 +4,17 @@
     <a asp-action="add" class="ui primary button">Добавить</a>
 </div>
 
+<div class="ui tiny modal">
+  <div class="header">Header</div>
+  <div class="content">
+    <p>Удалить?</p>
+  </div>
+  <div class="actions">
+    <a class="ui approve button">Да</a>
+    <a class="ui cancel button">Нет</a>
+  </div>
+</div>
+
 <table class="ui basic selectable table">
 <thead>
     <tr>
@@ -21,8 +32,19 @@
             <td>@row.СетевоеИмя</td>
             <td>@row.Порт</td>
             <td>@row.Режим</td>
-            <td><a asp-action="delete" asp-route-id="@row.Идентификатор"><i class="remove icon"></i></a></td>
+            <td><a asp-action="delete" asp-route-id="@row.Идентификатор" class="delete" id="id-@row.Идентификатор"><i class="remove icon"></i></a></td>
         </tr>
     }
 </tbody>
 </table>
+
+<script>
+    $('a.delete').click(function(evnt){
+        evnt.preventDefault();
+        var dialog = $('.modal')
+        var myId = this.id.substr(3);
+        dialog.find('div.content > p').text('Удалить элемент ' + myId + '?');
+        dialog.find('div.actions > .approve').attr('href', '/agents/delete/'+myId);
+        dialog.modal('show');
+    });
+</script>
