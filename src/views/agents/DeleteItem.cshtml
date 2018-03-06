@@ -1,9 +1,0 @@
-<h2 class="ui dividing header">Агент кластера</h2>
-
-<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Идентификатор" class="ui form">
-    
-<p class="textarea"><label for="Идентификатор"><strong>Удалить @Model?.Идентификатор ?</strong></label></p>
-        
-    <button type="submit" class="ui primary button">Удалить</button> 
-    <a asp-action="index" class="ui primary button">Отмена</a>
-</form>
