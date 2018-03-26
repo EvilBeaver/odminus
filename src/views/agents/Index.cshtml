@@ -5,14 +5,16 @@
 </div>
 
 <div class="ui tiny modal">
-  <div class="header">Header</div>
-  <div class="content">
-    <p>Удалить?</p>
-  </div>
-  <div class="actions">
-    <a class="ui approve button">Да</a>
-    <a class="ui cancel button">Нет</a>
-  </div>
+  <div class="header">Удаление элемента</div>
+  <form id="confirmationForm" method="POST" action="">
+      <div class="content">
+        <p>Удалить?</p>
+    </div>
+    <div class="actions">
+        <button class="ui approve button" type="submit">Да</button>
+        <button class="ui cancel button">Нет</button>
+    </div>
+  </form>
 </div>
 
 <table class="ui basic selectable table">
@@ -44,7 +46,7 @@
         var dialog = $('.modal')
         var myId = this.id.substr(3);
         dialog.find('div.content > p').text('Удалить элемент ' + myId + '?');
-        dialog.find('div.actions > .approve').attr('href', '/agents/delete/'+myId);
+        dialog.find('#confirmationForm').attr('action', '/agents/delete/'+myId);
         dialog.modal('show');
     });
 </script>
