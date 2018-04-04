@@ -1,7 +1,7 @@
-<h1>Агенты администрируемых серверов</h1>
+<h2>Агенты администрируемых серверов</h2>
 
-<div id="cmdbar" class="ui buttons">
-    <a asp-action="add" class="ui primary button">Добавить</a>
+<div id="cmdbar" class="ui float right">
+    <a asp-action="add">Добавить</a>
 </div>
 
 <div class="ui tiny modal">
@@ -17,28 +17,33 @@
   </form>
 </div>
 
-<table class="ui basic selectable table">
-<thead>
-    <tr>
-        <th>Идентификатор</th>
-        <th>Сетевое имя</th>
-        <th>Порт</th>
-        <th>Режим</th>
-        <th>Удалить</th>
-    </tr>
-</thead>
-<tbody>
+<div class="ui divided items">
     @foreach(var row in Model) {
-        <tr>
-            <td><a asp-action="edit" asp-route-id="@row.Идентификатор">@row.Идентификатор</a></td>
-            <td>@row.СетевоеИмя</td>
-            <td>@row.Порт</td>
-            <td>@row.Режим</td>
-            <td><a asp-action="delete" asp-route-id="@row.Идентификатор" class="delete" id="id-@row.Идентификатор"><i class="remove icon"></i></a></td>
-        </tr>
+      <div class="item">
+        <div class="image"><i class="laptop massive icon"></i></div>
+        <div class="content">
+            <a class="header" asp-action="overview" asp-controller="cluster">@row.Идентификатор</a>
+            <div class="meta">
+                <span>Сетевое имя: @row.СетевоеИмя</span>
+                <span>Порт: @row.Порт</span>
+            </div>
+            <div class="extra" id="agnt-@row.Идентификатор">
+                <div class="ui dropdown">
+                    <div class="text">Действия</div>
+                    <div class="menu">
+                        <div class="item">
+                            <a asp-action="edit" asp-route-id="@row.Идентификатор"><i class="edit icon"></i>Редактировать</a>
+                        </div>
+                        <div class="item">
+                            <a><i class="remove icon"></i>Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
     }
-</tbody>
-</table>
+</div>
 
 <script>
     $('a.delete').click(function(evnt){
