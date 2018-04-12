@@ -1,11 +1,12 @@
-<h2>Агенты администрируемых серверов</h2>
+<h2 class="ui header">Агенты администрируемых серверов</h2>
 
 <div id="cmdbar" class="ui float right">
-    <a asp-action="add">Добавить</a>
+    <a class="ui tiny primary button" asp-action="add">Добавить</a>
+    <div class="ui divider"></div>
 </div>
 
 <div class="ui tiny modal">
-  <div class="header">Header</div>
+  <div class="header">Подтверждение</div>
   <div class="content">
     <p>Удалить?</p>
   </div>
@@ -21,23 +22,16 @@
     @foreach(var row in Model) {
       <div class="item">
         <div class="image"><i class="laptop massive icon"></i></div>
-        <div class="content">
+        <div class="middle aligned content">
             <a class="header" asp-action="overview" asp-controller="cluster">@row.Идентификатор</a>
             <div class="meta">
                 <span>Сетевое имя: @row.СетевоеИмя</span>
                 <span>Порт: @row.Порт</span>
             </div>
-            <div class="extra" id="agnt-@row.Идентификатор">
-                <div class="ui dropdown">
-                    <div class="text">Действия</div>
-                    <div class="menu">
-                        <div class="item">
-                            <a asp-action="edit" asp-route-id="@row.Идентификатор"><i class="edit icon"></i>Редактировать</a>
-                        </div>
-                        <div class="item">
-                            <a><i class="remove icon"></i>Удалить</a>
-                        </div>
-                    </div>
+            <div class="extra" id="item-@row.Идентификатор">
+                <div class="ui right floated">
+                    <a class="ui tiny button" asp-action="edit" asp-route-id="@row.Идентификатор"><i class="edit icon"></i>Редактировать</a>
+                    <a class="ui tiny delete button" id="del-@row.Идентификатор"><i class="remove icon"></i>Удалить</a>
                 </div>
             </div>
         </div>
@@ -49,7 +43,7 @@
     $('a.delete').click(function(evnt){
         evnt.preventDefault();
         var dialog = $('.modal')
-        var myId = this.id.substr(3);
+        var myId = this.id.substr(4);
         dialog.find('div.content > p').text('Удалить элемент ' + myId + '?');
         dialog.find('div.actions > a.approve').click(function(){
             $('#poster').submit();

@@ -1,7 +1,7 @@
 <h2 class="ui dividing header">Агент кластера</h2>
 
 <form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Идентификатор" class="ui form">
-    
+    <div asp-validation-summary="All"></div>
     <p class="field">
         <label for="Идентификатор">Идентификатор</label>
         <input name="Идентификатор" value="@Model?.Идентификатор"/>
@@ -14,6 +14,9 @@
         <label for="Порт">Порт</label>
         <input name="Порт" value="@Model?.Порт"/>
     </p>
-    
+    <p class="field">
+        <label for="Описание">Описание</label>
+        <textarea rows="2" name="Описание">@Model?.Описание</textarea>
+    </p>
     <button type="submit" class="ui primary button">Сохранить</button>
 </form>
