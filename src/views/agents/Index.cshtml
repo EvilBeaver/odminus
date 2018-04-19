@@ -23,7 +23,7 @@
       <div class="item">
         <div class="image"><i class="laptop massive icon"></i></div>
         <div class="middle aligned content">
-            <a class="header" asp-action="overview" asp-controller="cluster">@row.Идентификатор</a>
+            <a class="header" asp-action="clusters" asp-route-id="@row.Идентификатор">@row.Идентификатор</a>
             <div class="meta">
                 <span>Сетевое имя: @row.СетевоеИмя</span>
                 <span>Порт: @row.Порт</span>
