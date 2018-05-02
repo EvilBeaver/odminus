@@ -1,3 +1,6 @@
+@{
+    Layout = "_noSidebarLayout";
+}
 <h2 class="ui header">Агенты администрируемых серверов</h2>
 
 <div id="cmdbar" class="ui float right">
@@ -23,7 +26,10 @@
       <div class="item">
         <div class="image"><i class="laptop massive icon"></i></div>
         <div class="middle aligned content">
-            <a class="header" asp-action="clusters" asp-route-id="@row.Идентификатор">@row.Идентификатор</a>
+            <a class="header" 
+                asp-controller="clusters" 
+                asp-action="Index" 
+                asp-route-agent="@row.Идентификатор">@row.Идентификатор</a>
             <div class="meta">
                 <span>Сетевое имя: @row.СетевоеИмя</span>
                 <span>Порт: @row.Порт</span>
