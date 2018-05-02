@@ -14,7 +14,7 @@
                     asp-controller="clusters" 
                     asp-action="overview"
                     asp-route-cluster="@Кластер.Ид()">@Кластер.Имя()</a>
-                <div class="description">@Кластер.АдресСервера()</div>
+                <div class="description">@Кластер.АдресСервера():@Кластер.ПортСервера()</div>
             </div>
         </div>
     }
