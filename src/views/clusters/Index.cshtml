@@ -1,15 +1,33 @@
-@{
-    Layout = "_noSidebarLayout";
-}
-<h1 class="ui dividing header">@Model.Агент.Идентификатор</h1>
-<div>@Model.Агент.СетевоеИмя : @Model.Агент.Порт <em>@Model.Агент.Описание</em></div>
+
+<div class="ui dividing header">
+    <h1>@Model.Агент.Идентификатор</h1>
+    <div>@Model.Агент.СетевоеИмя : @Model.Агент.Порт <em>@Model.Агент.Описание</em></div>
+</div>
+
+<div class="ui tiny modal">
+  <div class="header">Подтверждение</div>
+  <div class="content">
+    <p>Удалить?</p>
+  </div>
+  <div class="actions">
+    <a class="ui approve button">Да</a>
+    <a class="ui cancel button">Нет</a>
+  </div>
+  <form id="poster" method="POST" action="">
+  </form>
+</div>
 
 <h2 class="ui header">Кластеры серверов</h2>
+<div id="cmdbar" class="ui float right">
+    <a class="ui tiny primary button" asp-action="add">Добавить</a>
+    <div class="ui divider"></div>
+</div>
+
 <div class="ui relaxed divided list">
     @foreach(var Кластер in @Model.Кластеры) {
         <div class="item">
             <i class="large middle aligned server icon"></i>
-            <div class="content">
+            <div class="content" id="@Кластер.Ид()">
                 <a class="header" 
                     asp-controller="clusters" 
                     asp-action="overview"
@@ -19,3 +37,21 @@
         </div>
     }
 </div>
+
+<script>
+    $('a.delete').click(function(evnt){
+        evnt.preventDefault();
+        var dialog = $('.modal')
+        var myId = this.id;
+        dialog.find('div.content > p').text('Удалить элемент ' + myId + '?');
+        dialog.find('div.actions > a.approve').click(function(){
+            $('#poster').submit();
+        });
+        @{
+        @:var url = '@Url.Action("delete")'
+        }
+        $('#poster').attr('action', url+'/'+myId);
+        
+        dialog.modal('show');
+    });
+</script>
