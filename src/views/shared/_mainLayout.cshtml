@@ -19,13 +19,19 @@
     <div class="ui grid">
         <div class="row">
             <div class="three wide column" id="sidebar">
-                <div class="ui secondary vertical fluid menu">
-                    <a class="item active" asp-controller="agents" asp-action="index">Агенты серверов</a>
-                    <div class="ui hidden divider"></div>
-                    <a class="item">Информационные базы</a>
-                    <a class="item">Администраторы</a>
-                    <a class="item">Блокировки</a>
-                </div>
+                @if(ViewData.ContainsKey("Sidebar")) {
+                    <div class="ui secondary vertical fluid menu">                    
+                    @foreach(var item in ViewData["Sidebar"]){
+                        if(item.Тип == "Ссылка"){
+                            <a class="item active" asp-controller="agents" asp-action="index">Агенты серверов</a>
+                        }
+                        else
+                        {
+                            <div class="ui hidden divider"></div>
+                        }
+                    }
+                    </div>
+                }
             </div>
             <div class="twelve wide column" id="content">
                 @RenderBody()

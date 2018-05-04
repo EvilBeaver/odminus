@@ -1,0 +1,28 @@
+
+<div class="ui tiny modal">
+  <div class="header">Подтверждение</div>
+  <div class="content">
+    <p>Удалить?</p>
+  </div>
+  <div class="actions">
+    <a class="ui approve button">Да</a>
+    <a class="ui cancel button">Нет</a>
+  </div>
+  <form id="poster" method="POST" action="">
+  </form>
+</div>
+
+<script>
+    $('a.delete').click(function(evnt){
+        evnt.preventDefault();
+        var dialog = $('.modal')
+        var myId = this.id;
+        dialog.find('div.content > p').text('Удалить элемент ' + myId + '?');
+        dialog.find('div.actions > a.approve').click(function(){
+            $('#poster').submit();
+        });
+       $('#poster').attr('action', '@Url.Action("delete")'+'/'+myId);
+       
+        dialog.modal('show');
+    });
+</script>
