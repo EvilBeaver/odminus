@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+
+@functions{
+    string LinkClass(dynamic item)
+    {
+        if(item.Активность == true) {
+            return "active";
+        }
+
+        return "";
+    }
+} 
+
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -8,25 +20,17 @@
     <link rel="stylesheet" href="~/default.css"/>
 </head>
 <body>
-    <!-- top menu -->
-    <div class="ui inverted huge borderless fluid menu">
-      <a class="header item">Odminus</a>
-      <div class="right menu">
-        <a class="item">Настройки</a>
-        <a class="item">Помощь</a>
-      </div>
-    </div>
+    @Html.Partial("topPanel")
     <div class="ui grid">
         <div class="row">
             <div class="three wide column" id="sidebar">
                 @if(ViewData.ContainsKey("Sidebar")) {
                     <div class="ui secondary vertical fluid menu">                    
-                    @foreach(var item in ViewData["Sidebar"]){
+                    @foreach(var item in (dynamic)ViewData["Sidebar"]){
                         if(item.Тип == "Ссылка"){
-                            <a class="item active" asp-controller="agents" asp-action="index">Агенты серверов</a>
+                            <a class="item @LinkClass(item)" href="@item.Адрес">@item.Текст</a>
                         }
-                        else
-                        {
+                        else if(item.Тип == "Разделитель"){
                             <div class="ui hidden divider"></div>
                         }
                     }

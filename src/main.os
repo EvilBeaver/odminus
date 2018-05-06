@@ -12,6 +12,6 @@
 	УмолчанияАгенты.Вставить("controller","agents");
 	КоллекцияМаршрутов.Добавить("Агенты","agents/{action=Index}/{id?}",УмолчанияАгенты);
 
-	КоллекцияМаршрутов.Добавить("ПоАгенту","{agent}/{controller=overview}/{action=Index}/{id?}");
+	КоллекцияМаршрутов.Добавить("ПоАгенту","{agent}/{controller}/{action=Index}/{id?}");
 	КоллекцияМаршрутов.Добавить("ПоУмолчанию","{controller=agents}/{action=Index}/{id?}");
 КонецПроцедуры

@@ -1,30 +1,32 @@
-@{
-    Layout = "_noSidebarLayout";
-}
-
-<div class="ui dividing header">
+<div class="ui header">
     <h1>@Model.Агент.Идентификатор</h1>
-    <div>@Model.Агент.СетевоеИмя : @Model.Агент.Порт <em>@Model.Агент.Описание</em></div>
 </div>
 
-<h2 class="ui header">Кластеры серверов</h2>
 <div id="cmdbar" class="ui float right">
     <a class="ui tiny primary button" asp-action="add">Добавить</a>
     <div class="ui divider"></div>
 </div>
 
-<div class="ui relaxed divided list">
-    @foreach(var Кластер in @Model.Кластеры) {
-        <div class="item">
-            <i class="large middle aligned server icon"></i>
-            <div class="content" id="@Кластер.Ид()">
-                <a class="header" 
-                    asp-controller="clusters" 
-                    asp-action="overview"
-                    asp-route-cluster="@Кластер.Ид()">@Кластер.Имя()</a>
-                <div class="description">@Кластер.АдресСервера():@Кластер.ПортСервера()</div>
+<div class="ui divided items">
+    @foreach(var Кластер in Model.Кластеры) {
+      <div class="item">
+        <div class="content" id="@Кластер.Ид()">
+            <a class="header" 
+                asp-controller="clusters" 
+                asp-action="overview" 
+                asp-route-cluster="@Кластер.Ид()">@Кластер.Имя()</a>
+            <div class="meta">
+                <span>Адрес сервера: @Кластер.АдресСервера()</span>
+                <span>Порт: @Кластер.ПортСервера()</span>
+            </div>
+            <div class="extra">
+                <div class="ui right floated">
+                    <a class="ui tiny button" asp-action="edit" asp-route-id="@Кластер.Ид()"><i class="edit icon"></i>Редактировать</a>
+                    <a class="ui tiny delete button" id="@Кластер.Ид()"><i class="remove icon"></i>Удалить</a>
+                </div>
             </div>
         </div>
+      </div>
     }
 </div>
 
