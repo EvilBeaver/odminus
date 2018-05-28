@@ -1,0 +1,42 @@
+<style>
+    tr.clickable {
+      cursor: pointer;
+    }
+</style>
+
+<div class="ui divided header">
+    @Model.Заголовок
+</div>
+
+<div id="cmdbar" class="ui float right">
+    <a class="ui tiny primary button" asp-action="add">Добавить</a>
+    <div class="ui divider"></div>
+</div>
+
+<table class="ui selectable celled table">
+    <thead>
+        <tr>
+            @foreach(var Колонка in @Model.Колонки) {
+                <th>@Колонка</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var Элемент in Model.Данные) {
+            <tr class="clickable" id="@Элемент.Получить(@Model.ПолеИдентификатора)">
+            @foreach(var Колонка in Model.Колонки) {
+                <td>@Элемент.Получить(Колонка)</td>
+            }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+$("tr.clickable").on("click",function(e){
+  e.stopPropagation();
+  url='@Url.Action("edit")'+'/'+this.id
+  window.location = url;
+  return false;
+});
+</script>

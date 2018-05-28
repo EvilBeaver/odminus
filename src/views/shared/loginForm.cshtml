@@ -1,0 +1,17 @@
+
+<div class="ui divided header">
+    @Model.Заголовок
+</div>
+
+<form class="ui form" action="@Model.Действие" method="POST">
+  <div asp-validation-summary="All"/>
+  <div class="field">
+    <label>Имя пользователя</label>
+    <input type="text" name="userName" placeholder="Имя пользователя">
+  </div>
+  <div class="field">
+    <label>Пароль</label>
+    <input type="password" name="password" placeholder="Пароль">
+  </div>
+  <button class="ui button" type="submit">Авторизовать</button>
+</form>
