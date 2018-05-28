@@ -1,0 +1,27 @@
+<h2 class="ui dividing header">Администратор Агента кластера</h2>
+
+<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Имя" class="ui form">
+    <div asp-validation-summary="All"></div>
+    <p class="field">
+        <label for="Имя">Имя</label>
+        <input name="Имя" value="@Model?.Имя"/>
+    </p>
+    <p class="field">
+        <label for="Пароль">Сетевое имя</label>
+        <input name="Пароль" value="@Model?.Пароль"/>
+    </p>
+    <p class="field">
+        <label for="ПовторПароля">Сетевое имя</label>
+        <input name="ПовторПароля" value="@Model?.ПовторПароля"/>
+    </p>
+    <p class="field">
+        <label for="Описание">Описание</label>
+        <textarea rows="2" name="Описание">@Model?.Описание</textarea>
+    </p>
+    <button type="submit" class="ui primary button">Сохранить</button>
+    @if(Model?.Имя != null) {
+        <a class="negative ui button" asp-action="delete" id="Model.Имя">Удалить</a>
+    }
+</form>
+
+@Html.Partial("deleteConfirmPartialView")
