@@ -9,15 +9,13 @@
     }
 } 
 
-@if(ViewData.ContainsKey("Sidebar")) {
-    <div class="ui secondary vertical fluid menu">                    
-        @foreach(var item in (dynamic)ViewData["Sidebar"]){
-            if(item.Тип == "Ссылка"){
-                <a class="item @LinkClass(item)" href="@item.Адрес">@item.Текст</a>
-            }
-            else if(item.Тип == "Разделитель"){
-                <div class="ui hidden divider"></div>
-            }
+<div class="ui secondary vertical fluid menu">    
+@foreach(var item in Model.Строки) {
+    if(item.Тип == "Ссылка"){
+        <a class="item @LinkClass(item)" href="@item.Адрес">@item.Текст</a>
     }
-    </div>
+    else if(item.Тип == "Разделитель"){
+        <div class="ui hidden divider"></div>
+    }
 }
+</div>
