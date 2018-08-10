@@ -19,7 +19,7 @@
         <textarea rows="2" name="Описание">@Model?.Описание</textarea>
     </p>
     <button type="submit" class="ui primary button">Сохранить</button>
-    @if(Model?.Имя != null) {
+    @if(ViewBag.exists != null) {
         <a class="negative ui button" asp-action="delete" id="Model.Имя">Удалить</a>
     }
 </form>
