@@ -4,33 +4,46 @@
 
 <h2 class="header">Агенты администрируемых серверов</h2>
 
-<div id="cmdbar" class="mt-2">
+<div id="cmdbar" class="mt-6">
     <a class="primary button" asp-action="add">Добавить</a>
     <div class="ui divider"></div>
 </div>
 
-<div class="ui divided items">
-    @foreach(var row in Model) {
-      <div class="item">
-        <div class="image"><i class="laptop massive icon"></i></div>
-        <div class="middle aligned content">
-            <a class="header" 
-                asp-controller="clusters" 
-                asp-action="Index" 
-                asp-route-agent="@row.Идентификатор">@row.Идентификатор</a>
-            <div class="meta">
-                <span>Сетевое имя: @row.СетевоеИмя</span>
-                <span>Порт: @row.Порт</span>
-            </div>
-            <div class="extra" id="item-@row.Идентификатор">
-                <div class="ui right floated">
-                    <a class="ui tiny button" asp-action="edit" asp-route-id="@row.Идентификатор"><i class="edit icon"></i>Редактировать</a>
-                    <a class="ui tiny delete button" id="@row.Идентификатор"><i class="remove icon"></i>Удалить</a>
-                </div>
-            </div>
-        </div>
-      </div>
-    }
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Название</th>
+                <th>Сетевое имя</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var row in Model) {
+                <tr>
+                    <td><span class="mif-display mif-5x fg-green"></span></td>
+                    <td><a 
+                        asp-controller="clusters" 
+                        asp-action="Index" 
+                        asp-route-agent="@row.Идентификатор">@row.Идентификатор</a></td>
+                    <td>
+                        <a asp-controller="clusters" 
+                            asp-action="Index" 
+                            asp-route-agent="@row.Идентификатор">
+                            @row.СетевоеИмя:@row.Порт
+                        </a>
+                    </td>
+                    <td colspan="2">
+                        <div class="float-right">
+                        <a class="button" asp-action="edit" asp-route-id="@row.Идентификатор"><i class="far fa-edit"></i> Изменить</a>
+                        <a class="negative button delete" id="@row.Идентификатор"><i class="far fa-trash-alt"></i> Удалить</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 @Html.Partial("deleteConfirmPartialView")

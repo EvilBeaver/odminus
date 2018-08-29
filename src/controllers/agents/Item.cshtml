@@ -3,23 +3,23 @@
 }
 <h2 class="divided header">Агент кластера</h2>
 
-<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Идентификатор" class="ui form">
+<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Идентификатор" class="form">
     <div asp-validation-summary="All"></div>
-    <p class="field">
+    <div class="form-group">
         <label for="Идентификатор">Идентификатор</label>
-        <input name="Идентификатор" value="@Model?.Идентификатор"/>
-    </p>
-    <p class="field">
+        <input name="Идентификатор" value="@Model?.Идентификатор" type="text"/>
+    </div>
+    <div class="form-group">
         <label for="СетевоеИмя">Сетевое имя</label>
-        <input name="СетевоеИмя" value="@Model?.СетевоеИмя"/>
-    </p>
-    <p class="field">
+        <input name="СетевоеИмя" value="@Model?.СетевоеИмя" type="text"/>
+    </div>
+    <div class="form-group">
         <label for="Порт">Порт</label>
-        <input name="Порт" value="@Model?.Порт"/>
-    </p>
-    <p class="field">
+        <input name="Порт" value="@Model?.Порт" type="text"/>
+    </div>
+    <div class="form-group">
         <label for="Описание">Описание</label>
         <textarea rows="2" name="Описание">@Model?.Описание</textarea>
-    </p>
-    <button type="submit" class="primary button">Сохранить</button>
+    </div>
+    <button type="submit" class="primary button mt-8">Сохранить</button>
 </form>
