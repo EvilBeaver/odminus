@@ -9,13 +9,18 @@
     }
 } 
 
-<div class="ui secondary vertical fluid menu">    
+<div id="sidebar">
+<ul class="sidenav-simple sidenav-simple-expand-fs">
 @foreach(var item in Model.Строки) {
-    if(item.Тип == "Ссылка"){
-        <a class="item @LinkClass(item)" href="@item.Адрес">@item.Текст</a>
+    @if(item.Тип == "Ссылка") {
+    <li>
+       <a class="title @LinkClass(item)" href="@item.Адрес">@item.Текст</a>
+       <span class='mif-cloud icon'></span>
+    </li>
     }
     else if(item.Тип == "Разделитель"){
-        <div class="ui hidden divider"></div>
+        <li class="divider"></li>
     }
 }
+</ul>
 </div>

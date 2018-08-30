@@ -1,10 +1,45 @@
-<div class="ui header">
-    <h1>@Model.Агент.Идентификатор</h1>
+
+<h2>@Model.Агент.Идентификатор</h2>
+
+<div id="cmdbar" class="divided mt-6">
+    <a class="primary button" asp-action="add">Добавить</a>
 </div>
 
-<div id="cmdbar" class="ui float right">
-    <a class="ui tiny primary button" asp-action="add">Добавить</a>
-    <div class="ui divider"></div>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Название</th>
+                <th>Сетевое имя</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var Кластер in Model.Кластеры) {
+                <tr>
+                    <td><span class="mif-display mif-5x fg-green"></span></td>
+                    <td>
+                        <a asp-controller="cluster" 
+                            asp-action="overview" 
+                            asp-route-cluster="@Кластер.Ид()">@Кластер.Имя()</a>
+                    </td>
+                    <td>
+                        <a asp-controller="cluster" 
+                            asp-action="overview">
+                            @Кластер.АдресСервера():@Кластер.ПортСервера()
+                        </a>
+                    </td>
+                    <td>
+                        <div class="float-right">
+                        <a class="button" asp-action="edit" asp-route-id="@Кластер.Ид()"><i class="far fa-edit"></i> Изменить</a>
+                        <a class="negative button delete" id="@Кластер.Ид()"><i class="far fa-trash-alt"></i> Удалить</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div class="ui divided items">

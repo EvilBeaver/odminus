@@ -1,4 +1,21 @@
 .divided {
     border-bottom: 1px #ccc solid;
     padding-bottom: 15px;
+    margin-bottom: 8pt;
+}
+
+#sidebar {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 40px;
+    left: 0;
+    background-color: #f8f8f8;
+    overflow-x: hidden;
+    padding-top: 40px;
+}
+
+#content {
+    margin-left: 240px;
+    margin-top: 5em;
 }

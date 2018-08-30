@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"/>
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script href="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-    <link rel="stylesheet" href="~/default.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="/ui-styles.css"/>
 </head>
 <body>
     @Html.Partial("topPanel")
-    <div class="ui grid">
-        <div class="row">
-            <div class="three wide column" id="sidebar">
-                @await Component.InvokeAsync("navBar")
-            </div>
-            <div class="twelve wide column" id="content">
-                @RenderBody()
-            </div>
-        </div>
+    @await Component.InvokeAsync("navBar")
+    <div id="content">
+        @RenderBody()
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 </body>
 </html>
