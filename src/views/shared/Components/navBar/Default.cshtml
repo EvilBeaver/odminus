@@ -15,7 +15,7 @@
     @if(item.Тип == "Ссылка") {
     <li>
        <a class="title @LinkClass(item)" href="@item.Адрес">@item.Текст</a>
-       <span class='mif-cloud icon'></span>
+       <span class='@item.Картинка icon'></span>
     </li>
     }
     else if(item.Тип == "Разделитель"){

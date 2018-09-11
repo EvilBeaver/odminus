@@ -42,27 +42,4 @@
     </table>
 </div>
 
-<div class="ui divided items">
-    @foreach(var Кластер in Model.Кластеры) {
-      <div class="item">
-        <div class="content" id="@Кластер.Ид()">
-            <a class="header" 
-                asp-controller="cluster" 
-                asp-action="overview" 
-                asp-route-cluster="@Кластер.Ид()">@Кластер.Имя()</a>
-            <div class="meta">
-                <span>Адрес сервера: @Кластер.АдресСервера()</span>
-                <span>Порт: @Кластер.ПортСервера()</span>
-            </div>
-            <div class="extra">
-                <div class="ui right floated">
-                    <a class="ui tiny button" asp-action="edit" asp-route-id="@Кластер.Ид()"><i class="edit icon"></i>Редактировать</a>
-                    <a class="ui tiny delete button" id="@Кластер.Ид()"><i class="remove icon"></i>Удалить</a>
-                </div>
-            </div>
-        </div>
-      </div>
-    }
-</div>
-
 @Html.Partial("deleteConfirmPartialView")

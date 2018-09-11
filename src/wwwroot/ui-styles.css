@@ -16,6 +16,12 @@
 }
 
 #content {
-    margin-left: 240px;
+    margin-left: 280px;
     margin-top: 5em;
+}
+
+@media screen and (min-width: 0) {
+.sidenav-simple.sidenav-simple-expand-fs {
+    width: 260px;
+ }
 }
