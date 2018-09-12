@@ -5,6 +5,7 @@
 
 <p class="divided">
     Базы данных
+    @await Component.InvokeAsync("databases",new {mode = "overview", cluster = Model})
 </p>
 
 <p class="divided">

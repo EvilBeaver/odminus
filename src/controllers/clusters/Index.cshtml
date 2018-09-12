@@ -26,7 +26,8 @@
                     </td>
                     <td>
                         <a asp-controller="cluster" 
-                            asp-action="overview">
+                            asp-action="overview"
+                            asp-route-cluster="@Кластер.Ид()">
                             @Кластер.АдресСервера():@Кластер.ПортСервера()
                         </a>
                     </td>
