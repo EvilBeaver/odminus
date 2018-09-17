@@ -3,13 +3,13 @@
     Кластер серверов @Model.Имя()
 </h2>
 
-<p class="divided">
-    Базы данных
+<p class="mt-3 mb-2">
+    <strong>Базы данных</strong>
     @await Component.InvokeAsync("databases",new {mode = "overview", cluster = Model})
 </p>
 
 <p class="divided">
-    Рабочие серверы
+    <strong>Рабочие серверы</strong>
 </p>
 
 <p class="divided">

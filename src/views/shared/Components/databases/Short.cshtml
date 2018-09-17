@@ -1,6 +1,10 @@
 
-<ul>
+<ul class="inline-list">
 @foreach(var db in Model) {
-    <li>@db.Имя()</li>
+    <li><a 
+        asp-route-agent="@ViewContext.RouteData.Values["agent"]" 
+        asp-controller="infobase"
+        asp-action="Index"
+        asp-route-id="@db.Ид()"><span class="mif-database fg-blue"></span> @db.Имя()</a></li>
 }
 </ul>
