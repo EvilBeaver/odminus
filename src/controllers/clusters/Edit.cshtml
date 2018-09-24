@@ -6,46 +6,46 @@
 </div>
 
 <form 
-    asp-action="edit"
+    asp-action="asp-action="@ViewContext.RouteData.Values["action"]""
     asp-route-agent="@ViewContext.RouteData.Values["agent"]"
-    asp-route-id="@Model.Ид()" 
+    asp-route-id="@Model?.Ид()" 
     class="form"
     method="POST">
 
     <div class="row mb-2">
         <label class="cell-sm-2" for="Имя">Имя</label>
         <div class="cell-sm-6">
-            <input name="Имя" value="@Model.Получить("Имя", false)" type="text"/>
+            <input name="Имя" value="@Model?.Получить("Имя", false)" type="text"/>
         </div>
     </div>
     <div class="row mb-2">
         <label class="cell-sm-2" for="ИнтервалПерезапуска">Интервал перезапуска</label>
         <div class="cell-sm-6">
-            <input name="ИнтервалПерезапуска" value="@Model.Получить("ИнтервалПерезапуска", false)" type="number"/>
+            <input name="ИнтервалПерезапуска" value="@Model?.Получить("ИнтервалПерезапуска", false)" type="number"/>
         </div>
     </div>
     <div class="row mb-2">
         <label class="cell-sm-2" for="ДопустимыйОбъемПамяти">Допустимый объем памяти</label>
         <div class="cell-sm-6">
-            <input name="ДопустимыйОбъемПамяти" value="@Model.Получить("ДопустимыйОбъемПамяти", false)" type="number"/>
+            <input name="ДопустимыйОбъемПамяти" value="@Model?.Получить("ДопустимыйОбъемПамяти", false)" type="number"/>
         </div>
     </div>
     <div class="row mb-2">
         <label class="cell-sm-2" for="ИнтервалПревышенияДопустимогоОбъемаПамяти">Интервал превышения объема памяти</label>
         <div class="cell-sm-6">
-            <input name="ИнтервалПревышенияДопустимогоОбъемаПамяти" value="@Model.Получить("ИнтервалПревышенияДопустимогоОбъемаПамяти", false)" type="number"/>
+            <input name="ИнтервалПревышенияДопустимогоОбъемаПамяти" value="@Model?.Получить("ИнтервалПревышенияДопустимогоОбъемаПамяти", false)" type="number"/>
         </div>
     </div>
     <div class="row mb-2">
         <label class="cell-sm-2" for="ВыключенныеПроцессыОстанавливатьЧерез">Выключенные процессы останавливать через</label>
         <div class="cell-sm-6">
-            <input name="ВыключенныеПроцессыОстанавливатьЧерез" value="@Model.Получить("ВыключенныеПроцессыОстанавливатьЧерез", false)" type="number"/>
+            <input name="ВыключенныеПроцессыОстанавливатьЧерез" value="@Model?.Получить("ВыключенныеПроцессыОстанавливатьЧерез", false)" type="number"/>
         </div>
     </div>
     <div class="row mb-2">
         <label class="cell-sm-2" for="ПринудительноЗавершатьПроблемныеПроцессы">Принудительно завершать проблемные процессы</label>
         <div class="cell-sm-6">
-            <input name="ПринудительноЗавершатьПроблемныеПроцессы" value="@Model.Получить("ПринудительноЗавершатьПроблемныеПроцессы", false)" type="checkbox"/>
+            <input name="ПринудительноЗавершатьПроблемныеПроцессы" value="@Model?.Получить("ПринудительноЗавершатьПроблемныеПроцессы", false)" type="checkbox"/>
         </div>
     </div>
 
