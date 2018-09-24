@@ -25,3 +25,8 @@
     width: 260px;
  }
 }
+
+form > div.row > label {
+    font-size: small;
+    vertical-align: middle;
+}

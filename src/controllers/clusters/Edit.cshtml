@@ -1,10 +1,8 @@
 
 <h2>Кластер: @Model.Имя()</h2>
 
-<div>
-    <p>ID: @Model.Ид()</p>
-    <p>Адрес: @Model.АдресСервера()</p>
-    <p>Порт: @Model.ПортСервера()</p>
+<div class="mb-4">
+    <p>Адрес: @Model.АдресСервера():@Model.ПортСервера() ID: @Model.Ид()</p>
 </div>
 
 <form 
@@ -14,9 +12,43 @@
     class="form"
     method="POST">
 
-    <div class="form-group">
-        <label for="ИнтервалПерезапуска">Интервал перезапуска</label>
-        <input name="ИнтервалПерезапуска" value="@Model.Получить("ИнтервалПерезапуска", false)" type="text"/>
+    <div class="row mb-2">
+        <label class="cell-sm-2" for="Имя">Имя</label>
+        <div class="cell-sm-6">
+            <input name="Имя" value="@Model.Получить("Имя", false)" type="text"/>
+        </div>
     </div>
+    <div class="row mb-2">
+        <label class="cell-sm-2" for="ИнтервалПерезапуска">Интервал перезапуска</label>
+        <div class="cell-sm-6">
+            <input name="ИнтервалПерезапуска" value="@Model.Получить("ИнтервалПерезапуска", false)" type="number"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <label class="cell-sm-2" for="ДопустимыйОбъемПамяти">Допустимый объем памяти</label>
+        <div class="cell-sm-6">
+            <input name="ДопустимыйОбъемПамяти" value="@Model.Получить("ДопустимыйОбъемПамяти", false)" type="number"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <label class="cell-sm-2" for="ИнтервалПревышенияДопустимогоОбъемаПамяти">Интервал превышения объема памяти</label>
+        <div class="cell-sm-6">
+            <input name="ИнтервалПревышенияДопустимогоОбъемаПамяти" value="@Model.Получить("ИнтервалПревышенияДопустимогоОбъемаПамяти", false)" type="number"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <label class="cell-sm-2" for="ВыключенныеПроцессыОстанавливатьЧерез">Выключенные процессы останавливать через</label>
+        <div class="cell-sm-6">
+            <input name="ВыключенныеПроцессыОстанавливатьЧерез" value="@Model.Получить("ВыключенныеПроцессыОстанавливатьЧерез", false)" type="number"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <label class="cell-sm-2" for="ПринудительноЗавершатьПроблемныеПроцессы">Принудительно завершать проблемные процессы</label>
+        <div class="cell-sm-6">
+            <input name="ПринудительноЗавершатьПроблемныеПроцессы" value="@Model.Получить("ПринудительноЗавершатьПроблемныеПроцессы", false)" type="checkbox"/>
+        </div>
+    </div>
+
+    <button type="submit" class="primary button mt-4">Сохранить</button>
 
 </form>

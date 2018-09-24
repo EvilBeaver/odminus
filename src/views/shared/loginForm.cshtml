@@ -3,15 +3,15 @@
     @Model.Заголовок
 </div>
 
-<form class="ui form" action="@Model.Действие" method="POST">
+<form class="form" action="@Model.Действие" method="POST">
   <div asp-validation-summary="All"/>
-  <div class="field">
+  <div class="form-group">
     <label>Имя пользователя</label>
     <input type="text" name="userName" placeholder="Имя пользователя">
   </div>
-  <div class="field">
+  <div class="form-group">
     <label>Пароль</label>
     <input type="password" name="password" placeholder="Пароль">
   </div>
-  <button class="ui positive button" type="submit">Авторизовать</button>
+  <button class="primary button mt-6" type="submit">Авторизовать</button>
 </form>

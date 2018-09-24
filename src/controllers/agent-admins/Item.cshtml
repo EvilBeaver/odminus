@@ -1,24 +1,24 @@
 <h2 class="ui dividing header">Администратор Агента кластера</h2>
 
-<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Имя" class="ui form">
+<form asp-action="@ViewContext.RouteData.Values["action"]" asp-route-id="@Model?.Имя" class="form">
     <div asp-validation-summary="All"></div>
-    <p class="field">
+    <div class="form-group">
         <label for="Имя">Имя</label>
-        <input name="Имя" value="@Model?.Имя"/>
-    </p>
-    <p class="field">
+        <input name="Имя" value="@Model?.Имя" type="text"/>
+    </div>
+    <div class="form-group">
         <label for="Пароль">Пароль</label>
         <input name="Пароль" value="@Model?.Пароль" type="password"/>
-    </p>
-    <p class="field">
+    </div>
+    <div class="form-group">
         <label for="ПовторПароля">Повтор пароля</label>
         <input name="ПовторПароля" value="@Model?.ПовторПароля" type="password"/>
-    </p>
-    <p class="field">
+    </div>
+    <div class="form-group">
         <label for="Описание">Описание</label>
         <textarea rows="2" name="Описание">@Model?.Описание</textarea>
-    </p>
-    <button type="submit" class="ui primary button">Сохранить</button>
+    </div>
+    <button type="submit" class="primary button mt-8">Сохранить</button>
     @if(ViewBag.exists != null) {
         <a class="negative ui delete button" asp-action="delete" asp-route-id="@Model.Имя" id="@Model.Имя">Удалить</a>
     }
