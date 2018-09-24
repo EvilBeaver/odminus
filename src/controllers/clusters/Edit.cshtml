@@ -1,0 +1,22 @@
+
+<h2>Кластер: @Model.Имя()</h2>
+
+<div>
+    <p>ID: @Model.Ид()</p>
+    <p>Адрес: @Model.АдресСервера()</p>
+    <p>Порт: @Model.ПортСервера()</p>
+</div>
+
+<form 
+    asp-action="edit"
+    asp-route-agent="@ViewContext.RouteData.Values["agent"]"
+    asp-route-id="@Model.Ид()" 
+    class="form"
+    method="POST">
+
+    <div class="form-group">
+        <label for="ИнтервалПерезапуска">Интервал перезапуска</label>
+        <input name="ИнтервалПерезапуска" value="@Model.Получить("ИнтервалПерезапуска", false)" type="text"/>
+    </div>
+
+</form>
