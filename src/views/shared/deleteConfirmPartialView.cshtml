@@ -18,7 +18,7 @@
         var dialog = $('.dialog')
         var myId = this.id;
         dialog.find('div.dialog-content > p').text('Удалить элемент ' + myId + '?');
-        dialog.find('div.dialog-actions > a.approve').click(function(){
+        dialog.find('div.dialog-actions > button.alert').click(function(){
           $('#poster').submit();
         });
         $('#poster').attr('action', '@Url.Action("delete")'+'/'+myId);

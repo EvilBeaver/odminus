@@ -20,7 +20,7 @@
     </div>
     <button type="submit" class="primary button mt-8">Сохранить</button>
     @if(ViewBag.exists != null) {
-        <a class="negative ui delete button" asp-action="delete" asp-route-id="@Model.Имя" id="@Model.Имя">Удалить</a>
+        <a class="alert delete button mt-8" asp-action="delete" asp-route-id="@Model.Имя" id="@Model.Имя">Удалить</a>
     }
 </form>
 
