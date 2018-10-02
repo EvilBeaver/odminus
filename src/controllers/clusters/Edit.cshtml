@@ -11,6 +11,8 @@
     asp-route-id="@Model?.Ид()" 
     class="form"
     method="POST">
+    
+    <div asp-validation-summary="All"></div>
 
     <div class="row mb-2">
         <label class="cell-sm-2" for="Имя">Имя</label>
@@ -75,8 +77,8 @@
         </div>
     </div>
 
-    <button type="submit" class="primary button mt-4">Сохранить</button>
-
+    <button type="submit" class="primary button mt-4 mb=16">Сохранить</button>
+    <p>&nbsp;</p>
 </form>
 
 @functions {
