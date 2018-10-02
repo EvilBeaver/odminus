@@ -18,6 +18,7 @@
             <input name="Имя" value="@Model?.Получить("Имя", false)" type="text"/>
         </div>
     </div>
+    <h4 class="divided">Перезапуск процессов</h4>
     <div class="row mb-2">
         <label class="cell-sm-2" for="ИнтервалПерезапуска">Интервал перезапуска</label>
         <div class="cell-sm-6">
@@ -43,12 +44,43 @@
         </div>
     </div>
     <div class="row mb-2">
+        <label class="cell-sm-2" for="ДопустимоеОтклонениеКоличестваОшибокСервера">Допустимое отклонение количества ошибок сервера</label>
+        <div class="cell-sm-6">
+            <input name="ДопустимоеОтклонениеКоличестваОшибокСервера" value="@Model?.Получить("ДопустимоеОтклонениеКоличестваОшибокСервера", false)" type="number"/>
+        </div>
+    </div>
+    <div class="row mb-2">
         <label class="cell-sm-2" for="ПринудительноЗавершатьПроблемныеПроцессы">Принудительно завершать проблемные процессы</label>
         <div class="cell-sm-6">
             <input name="ПринудительноЗавершатьПроблемныеПроцессы" value="@Model?.Получить("ПринудительноЗавершатьПроблемныеПроцессы", false)" type="checkbox"/>
         </div>
     </div>
 
+    <h4 class="divided">Отказоустойчивость</h4>
+    
+    <div class="row mb-2">
+        <label class="cell-sm-2" for="УровеньОтказоустойчивости">Уровень отказоустойчивости</label>
+        <div class="cell-sm-6">
+            <input name="УровеньОтказоустойчивости" value="@Model?.Получить("УровеньОтказоустойчивости", false)" type="number"/>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <label class="cell-sm-2" for="РежимРаспределенияНагрузки">Распределение нагрузки</label>
+        <div class="cell-sm-6">
+            <select name="РежимРаспределенияНагрузки">
+                <!option @optionSelected("ПоПамяти",@Model?.Получить("УровеньОтказоустойчивости", false))>По памяти</!option>
+                <!option @optionSelected("ПоПроизводительности",@Model?.Получить("УровеньОтказоустойчивости", false))>По производительности</!option>
+            </select>
+        </div>
+    </div>
+
     <button type="submit" class="primary button mt-4">Сохранить</button>
 
 </form>
+
+@functions {
+    string optionSelected(string option, string currentValue) {
+        return $"value=\"{option}\"" + (option == currentValue? "selected":"");
+    }
+}
