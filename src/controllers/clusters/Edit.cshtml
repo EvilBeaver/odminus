@@ -54,7 +54,7 @@
     <div class="row mb-2">
         <label class="cell-sm-2" for="ПринудительноЗавершатьПроблемныеПроцессы">Принудительно завершать проблемные процессы</label>
         <div class="cell-sm-6">
-            <input name="ПринудительноЗавершатьПроблемныеПроцессы" value="@Model?.Получить("ПринудительноЗавершатьПроблемныеПроцессы", false)" type="checkbox"/>
+            <input name="ПринудительноЗавершатьПроблемныеПроцессы" value="yes" @checkboxSelected(Model?.Получить("ПринудительноЗавершатьПроблемныеПроцессы", false)) type="checkbox"/>
         </div>
     </div>
 
@@ -84,5 +84,9 @@
 @functions {
     string optionSelected(string option, string currentValue) {
         return $"value=\"{option}\"" + (option == currentValue? "selected":"");
+    }
+
+    string checkboxSelected(string value) {
+        return value == "0"?"":"checked";
     }
 }
