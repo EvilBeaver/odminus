@@ -1,0 +1,8 @@
+
+<h2>Информационные базы</h2>
+
+<div id="cmdbar" class="divided mt-6">
+    <a class="button" asp-action="add" asp-route-cluster="@Model.Ид()">Добавить</a>
+</div>
+
+@await Component.InvokeAsync("databases",new {mode = "details", cluster = Model})

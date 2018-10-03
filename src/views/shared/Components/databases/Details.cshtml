@@ -1,0 +1,11 @@
+
+<ul class="items-list">
+@foreach(var db in Model.dbList) {
+    <li class="item"><a 
+        asp-route-agent="@ViewContext.RouteData.Values["agent"]" 
+        asp-controller="infobase"
+        asp-action="edit"
+        asp-route-cluster="@Model.clusterId"
+        asp-route-id="@db.Имя()"><span class="mif-database fg-blue"></span> @db.Имя()</a> @db.Описание()</li>
+}
+</ul>
