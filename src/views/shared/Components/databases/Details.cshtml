@@ -1,11 +1,25 @@
 
-<ul class="items-list">
+<table class="table">
 @foreach(var db in Model.dbList) {
-    <li class="item"><a 
-        asp-route-agent="@ViewContext.RouteData.Values["agent"]" 
-        asp-controller="infobase"
-        asp-action="edit"
-        asp-route-cluster="@Model.clusterId"
-        asp-route-id="@db.Имя()"><span class="mif-database fg-blue"></span> @db.Имя()</a> @db.Описание()</li>
+    <tr>
+        <td>
+            <a 
+                asp-route-agent="@ViewContext.RouteData.Values["agent"]" 
+                asp-controller="infobase"
+                asp-action="edit"
+                asp-route-cluster="@Model.clusterId"
+                asp-route-id="@db.Имя()"><span class="mif-database fg-blue"></span> @db.Имя()
+            </a>
+        </td>
+        <td>
+            @db.Описание()
+        </td>
+        <td>
+            <ul class="inline-list">
+                <li><a class="button">Соединения</a></li>
+                <li><a class="button">Сеансы</a></li>
+            </ul>
+        </td>
+    </tr>
 }
-</ul>
+</table>
