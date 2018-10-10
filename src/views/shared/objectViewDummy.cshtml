@@ -1,0 +1,18 @@
+<form asp-action="@ViewContext.RouteData.Values["action"]"
+    asp-route-agent="@ViewContext.RouteData.Values["agent"]"
+    asp-route-id="@Model?.Ид()" 
+    class="form"
+    method="POST">
+
+    <div asp-validation-summary="All"></div>
+
+    @foreach(var p in @Model.ПараметрыОбъекта("ИмяПараметра")) {
+        <div class="row mb-2">
+            <label class="cell-sm-2" for="@p.Ключ">@p.Ключ</label>
+            <div class="cell-sm-6">
+                <input name="@p.Ключ" value="@Model?.Получить(p.key, false)" type="text" disabled/>
+            </div>
+        </div>
+    }
+
+</form>
