@@ -1,3 +1,5 @@
+@using System.Text
+
 <form asp-action="@ViewContext.RouteData.Values["action"]"
     asp-route-agent="@ViewContext.RouteData.Values["agent"]"
     asp-route-id="@Model?.Ид()" 
@@ -8,7 +10,7 @@
 
     @foreach(var p in @Model.ПараметрыОбъекта("ИмяПараметра")) {
         <div class="row mb-2">
-            <label class="cell-sm-2" for="@p.Ключ">@p.Ключ</label>
+            <label class="cell-sm-2" for="@p.Ключ">@Synonym(p.Ключ)</label>
             <div class="cell-sm-6">
                 <input name="@p.Ключ" value="@Model?.Получить(p.key, false)" type="text" disabled/>
             </div>
@@ -16,3 +18,39 @@
     }
 
 </form>
+
+@functions {
+    // Порт // https://infostart.ru/public/162834/
+    string Synonym(string name){
+        if(String.IsNullOrEmpty(name))
+            return "";
+
+        int len = name.Length;
+        var syn = new StringBuilder(len*2);
+        syn.Append(Char.ToUpperInvariant(name[0]));
+        for(int i = 1; i<len; i++) {
+            var symbol = name[i];
+            var prev = name[i-1];
+            var next = i == len-1? '\0' : name[i+1];
+            var isCapital = symbol == Char.ToUpperInvariant(symbol);
+            var prevIsCapital = prev == Char.ToUpperInvariant(prev);
+            var nextIsCapital = next == Char.ToUpperInvariant(next);
+
+            if(!prevIsCapital && isCapital){
+                syn.Append(' ');
+                if(nextIsCapital)
+                    syn.Append(symbol);
+                else
+                    syn.Append(Char.ToLowerInvariant(symbol));
+            }
+            else if(isCapital && !nextIsCapital){
+                syn.Append(' ');
+                syn.Append(symbol);
+            }
+            else {
+                syn.Append(symbol);
+            }
+        }
+        return syn.ToString();
+    }
+}

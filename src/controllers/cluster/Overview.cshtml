@@ -1,6 +1,10 @@
 
 <h2 class="divided">
     Кластер серверов @Model.Имя()
+    <a class="button" 
+        asp-controller="clusters" 
+        asp-action="edit"
+        asp-route-id="@Model.Ид()">Свойства кластера</a>
 </h2>
 
 <p class="mt-3 mb-2">
