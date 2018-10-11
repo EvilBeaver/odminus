@@ -35,8 +35,19 @@
 <script>
 $("tr.clickable").on("click",function(e){
   e.stopPropagation();
-  url='@Url.Action("edit")'+'/'+this.id
+  url='@Url.Action("edit")'+'/'+this.id + '@viewParameters()'
   window.location = url;
   return false;
 });
 </script>
+
+@functions {
+    string viewParameters()
+    {
+        if(ViewBag.Cluster != null)
+        {
+            return "?cluster=" + ViewBag.Cluster;
+        }
+        return "";
+    }
+}
