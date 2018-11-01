@@ -1,0 +1,92 @@
+<div class="container">
+    <div class="row cell-md-4">
+        <p>Информационная база:</p>
+        <form action='' method="post" id="update-list-session">
+            <select id="change-db"data-role="select" onItemSelect='test_onItemSelect();'>
+                <option value="0"></option>
+                @foreach(var ТекБаза in Model.СписокИБ) {
+                    @if(@ТекБаза.Ид() == @Model.ДанныеИБ.Идентификатор){
+                        <option value="@ТекБаза.Ид()" selected>@ТекБаза.Имя()</option>
+                    }
+                    else{
+                        <option value="@ТекБаза.Ид()" @if(@ТекБаза.Ид() == @Model.ДанныеИБ.Идентификатор){ selected }>@ТекБаза.Имя()</option>
+                    }
+                }
+            </select>
+        </form>
+    </div>
+    <!-- <h2 id='test'>Сеансы</h2> -->
+    <div>
+        <table class="table compact striped table-border mt-4" style="overflow-x:auto;" data-role="table"
+            data-cls-table-top="row flex-nowrap" 
+            data-cls-search="cell-md-8"
+            data-cls-rows-count="cell-md-4"
+            data-check="true"
+            data-check-style="2"
+            >
+            <thead>
+                <tr>
+                    <th></th>
+                    @foreach(var Колонка in Model.МодельСписка.Колонки) {
+                        <th data-sortable="true">@Колонка</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var Сеанс in Model.СписокСеансов) {
+                    <tr data-idprocess='@Сеанс.Получить("Процесс_Ид")' data-idconnect='@Сеанс.Получить("Соединение_Ид")'>
+                        <td>
+                             <div class="dropdown-button place-right">
+                                <button class="button dropdown-toggle"><i class="fas fa-bars"></i></button>
+                                <ul class="d-menu" style="position: fixed;" data-role="dropdown">
+                                    <li><a href="#"><i class="fas fa-file-invoice"></i> Подробнее</a></li>
+                                    <li><a href="#"><i class="fas fa-ban"></i> Завершить</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        @foreach(var Колонка in Model.МодельСписка.Колонки) {
+                            <td>@Сеанс.Получить(@Колонка)</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="dialog" data-role="dialog">
+    <div class="dialog-title">Авторизация в базе 1С</div>
+    <form id="auth-db" method="POST" action="">
+        <p>Пользователь:</p>
+        <input type="text" data-role="input">
+        <p>Пароль:</p>
+        <input type="text" data-role="input">
+        <div class="dialog-actions">
+            <button class="button" id='dialog-cancel'>Отмена</button>
+            <button class="button primary" id='dialog-access'>Подтвердить</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+    var element_select = $('#change-db');
+    element_select.on('change', function(){
+        if(element_select.attr('ready') =='true')
+        {    
+            var dialog = $('.dialog')
+            Metro.dialog.open(dialog);
+            $('#dialog-access').click(function(){
+                //$('#auth-db').submit();
+                //$('#update-list-session').attr('action', '@Url.Action("index")' + '?cluster=@Model.Кластер' + '&db=' + element_select.val());
+                //$('#update-list-session').submit();
+            });
+            $('#dialog-cancel').click(function(){
+                Metro.dialog.close(dialog);
+            });
+        }
+        else{
+            element_select.attr('ready', 'true');   
+        }    
+    });
+</script>
