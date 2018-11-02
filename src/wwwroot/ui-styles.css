@@ -1,7 +1,18 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+
 .divided {
     border-bottom: 1px #ccc solid;
     padding-bottom: 15px;
     margin-bottom: 8pt;
+}
+
+#navview {
+    min-height: 400px;
 }
 
 #sidebar {
