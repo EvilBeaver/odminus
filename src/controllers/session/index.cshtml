@@ -1,0 +1,173 @@
+<div class="container">
+    <div class="row">
+        <div class="cell-2">
+            <p style="margin-top: 5px;">Информационная база:</p>
+        </div>
+        <div class="cell-3">
+            <form action='' method="post" id="session_list_update">
+                <select id="select_infobase" data-role="select">
+                    <option value="0"></option>
+                    @foreach(var ИнфоБаза in Model.СписокИнформационныхБаз) {
+                        @if(@ИнфоБаза.Ид() == @Model.ИнформационнаяБаза_Идентификатор){
+                            <option value="@ИнфоБаза.Ид()" selected>@ИнфоБаза.Имя()</option>
+                        }
+                        else{
+                            <option value="@ИнфоБаза.Ид()">@ИнфоБаза.Имя()</option>
+                        }
+                    }
+                </select>
+            </form>
+        </div>
+        <div class="" style="padding-right: 10px;">
+            <i class="fas fa-plug connection connection-off"></i>
+        </div>
+        <div class="cell-2">
+            <button class="button button-auth" onclick="infobaseAuth();">Авторизоваться</button>
+        </div>
+    </div>
+
+
+    <div class="table-component">
+        <table id="session-list" class="table compact striped table-border mt-4" style="overflow-x:auto;" data-role="table"
+                data-cls-table-top="row flex-nowrap" 
+                data-cls-search="cell-md-8"
+                data-cls-rows-count="cell-md-4"
+                data-check="true"
+                data-check-style="2"
+                data-on-data-load="$('#activity').show()"
+                data-on-data-loaded="$('#activity').hide()">
+        </table>
+    </div>
+
+
+    <div class="d-flex flex-justify-center">
+        <div id="activity" data-role="activity" data-type="cycle" data-style="color" style="display: none"></div>
+    </div>
+
+</div>
+
+<div class="dialog" data-role="dialog">
+    <div class="dialog-title">Авторизация в информационной базе</div>
+    <div class="dialog-content">
+        <!-- <p>Пользователь</p> -->
+        <input id='db-login'type="text" data-prepend="Пользователь: " data-history="false" data-role="input"> 
+        <!-- <p>Пароль</p> -->
+        <input id='db-password' data-prepend="Пароль: "type="password" data-role="input">   
+    </div>
+    <div class="dialog-actions">
+        <button class="button dialog-btn-cancel">Отмена</button>
+        <button class="button primary dialog-btn-access">Подтвердить</button>
+    </div>
+</div>
+
+<!-- Надо перенести в отдельный файл js -->
+<script>
+    var urlAuthDB = '@Url.RouteUrl(new { controller = "infobase", action = "auth"})';
+    var element_select = getSelectDB();
+    element_select.on('change', function(){
+        if(element_select.attr('ready') =='true')
+        {    
+            $('#activity').show();
+            $.ajax({
+                url: urlAuthDB + '?cluster=657583b5-ec6b-4dc5-9043-2063a204db95&db=' + element_select.val(),
+                method: 'GET',
+                success: function(data) {
+                    updateIconConnection(data);
+                    console.log(data);
+                    reloadList();
+                },
+                error: function (request, status, error){
+                    updateIconConnection('error');
+                    console.log(request);
+                    reloadList();
+                }
+            });
+        }
+        else{
+            element_select.attr('ready', 'true');   
+            reloadList();
+        }    
+    });
+
+
+    function updateIconConnection(result){
+        $('.connection').removeClass('connection-off').removeClass('connection-on');
+        if (result == 'Ok'){
+            $('.connection').addClass('connection-on');
+            $('.button-auth').css('display', 'none');
+        }
+        else{
+            $('.connection').addClass('connection-off');
+            $('.button-auth').css('display', 'block');
+        }
+        $('#activity').hide();
+    }
+
+    function infobaseAuth(){
+        var dialog = $('.dialog');   
+        $('.dialog-btn-access').click(function(){
+            Metro.dialog.close(dialog);
+
+            $('#activity').show();
+
+            // Почему-то не парсится
+            var dataAuth = {
+                Пользователь: $("#db-login").val(),
+                Пароль: $("#db-password").val()
+            };
+
+            var dataStr = '{"Пользователь": "' + $("#db-login").val() + '", "Пароль": "' + $("#db-password").val() + '"}';
+
+            $.ajax({
+                url: urlAuthDB + '?cluster=657583b5-ec6b-4dc5-9043-2063a204db95&db=' + element_select.val(),
+                method: 'POST',
+                data: dataStr,
+                success: function(data) {
+                    updateIconConnection(data);   
+                    reloadList();
+                }, 
+                error: function (request, status, error) {
+                    updateIconConnection('error'); 
+                    reloadList();  
+                }
+            });
+
+        });
+        $('.dialog-btn-cancel').click(function(){
+            Metro.dialog.close(dialog);
+        });
+        Metro.dialog.open(dialog);
+    }
+
+    function reloadList(){
+        var thisSelect = element_select.val();
+        if ($('.connection').hasClass('connection-on')){
+            $.ajax({
+                url: '',
+                success: function(data) {
+                    $('#session-list').data('table').loadData(
+                        '@Url.Action("GetSessionData")' 
+                        + '?cluster=@Model.Кластер_Идентификатор' 
+                        + '&db=' + thisSelect, 
+                        true);
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: '',
+                success: function(data) {
+                    $('#session-list').data('table').loadData(
+                        '@Url.Action("GetSessionData")' 
+                        + '?cluster=' + thisSelect 
+                        + '&empty=true');
+                }
+            });
+        }
+    }
+
+    function getSelectDB(){
+        return $('#select_infobase');    
+    }
+
+</script>
