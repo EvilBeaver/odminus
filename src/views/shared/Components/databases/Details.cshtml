@@ -17,7 +17,12 @@
         <td>
             <ul class="inline-list">
                 <li><a class="button">Соединения</a></li>
-                <li><a class="button">Сеансы</a></li>
+                <li><a class="button" 
+                    asp-controller="session" 
+                    asp-action="index" 
+                    asp-route-cluster="@Model.clusterId" 
+                    asp-route-db="@db.Ид()">Сеансы
+                </a></li>
             </ul>
         </td>
     </tr>
