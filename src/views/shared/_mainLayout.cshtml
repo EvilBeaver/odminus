@@ -13,12 +13,35 @@
     <script src="/assets/jquery/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-    @Html.Partial("topPanel")
-    @await Component.InvokeAsync("navBar")
-    <div id="content">
-        @RenderBody()
+    <div>
+        @Html.Partial("topPanel")
+        <div id="navview" data-role="navview" data-expanded="fs" data-compact="false">
+            @await Component.InvokeAsync("navBar")
+            
+            <div id="content" class="navview-content">
+                <div class="mt-18 ml-10 mr-10">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="/assets/metro4/js/metro.min.js"></script>
+    <script>
+        var hintRoutines = {
+            showHint: function(hint, element){
+                if ($("#navview").hasClass('compacted')){
+                    hint.addClass("showHint");
+                    setTimeout(function(){
+                        hint.removeClass("showHint");
+                    }, 500)
+                }
+                else{
+                    hint.removeClass("showHint");
+                    hint.css('display','none');
+                }
+            }
+        }
+    </script>
 </body>
 </html>
