@@ -68,3 +68,7 @@ li > .active{
 a.hint.compact {
     display: none !important;
 }
+
+h2.title-page {
+    margin-bottom: 20px;
+}
