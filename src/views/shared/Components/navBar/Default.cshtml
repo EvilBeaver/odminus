@@ -9,18 +9,31 @@
     }
 } 
 
-<div id="sidebar">
-<ul class="sidenav-simple sidenav-simple-expand-fs">
-@foreach(var item in Model.Строки) {
-    @if(item.Тип == "Ссылка") {
-    <li>
-       <a class="title @LinkClass(item)" href="@item.Адрес">@item.Текст</a>
-       <span class='@item.Картинка icon'></span>
-    </li>
+<div id="sidebar" class="navview-pane">
+    <button class="pull-button custom-pull-button">
+        <span class="mif-menu"></span>
+    </button>
+    <ul class="navview-menu">
+    @foreach(var item in Model.Строки) {
+        @if(item.Тип == "Ссылка") {
+        <li>
+        <a class="title @LinkClass(item)" 
+            href="@item.Адрес" 
+            data-role="hint"
+            data-hint-position="right"
+            data-hint-text="@item.Текст"
+            data-cls-hint="hint-menu"
+            data-on-hint-show="hintRoutines.showHint"
+        >
+            
+            <span class="icon"><span class="@item.Картинка"></span></span>
+            <span class="caption">@item.Текст</span>
+        </a>
+        </li>
+        }
+        else if(item.Тип == "Разделитель"){
+            <li class="divider"></li>
+        }
     }
-    else if(item.Тип == "Разделитель"){
-        <li class="divider"></li>
-    }
-}
-</ul>
+    </ul>
 </div>
