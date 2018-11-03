@@ -1,14 +1,25 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+
 .divided {
     border-bottom: 1px #ccc solid;
     padding-bottom: 15px;
     margin-bottom: 8pt;
 }
 
+#navview {
+    min-height: 400px;
+}
+
 #sidebar {
     height: 100%;
     position: fixed;
     z-index: 1;
-    top: 40px;
+    top: 10px;
     left: 0;
     background-color: #f8f8f8;
     overflow-x: hidden;
@@ -20,11 +31,11 @@
     margin-top: 5em;
 }
 
-@media screen and (min-width: 0) {
+/* @media screen and (min-width: 0) {
 .sidenav-simple.sidenav-simple-expand-fs {
     width: 260px;
  }
-}
+} */
 
 form > div.row > label {
     font-size: small;
@@ -42,4 +53,22 @@ form > div.row > label {
 
 .connection-on {
     color: #2fc147;
+}
+
+li > .active{
+    color:#0366d6!important;
+    font-weight: 700;
+}
+
+.custom-pull-button {
+    margin-bottom: 0px !important;
+}
+
+
+a.hint.compact {
+    display: none !important;
+}
+
+h2.title-page {
+    margin-bottom: 20px;
 }
