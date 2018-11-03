@@ -70,7 +70,7 @@
         {    
             $('#activity').show();
             $.ajax({
-                url: urlAuthDB + '?cluster=657583b5-ec6b-4dc5-9043-2063a204db95&db=' + element_select.val(),
+                url: urlAuthDB + '?cluster=@Model.Кластер_Идентификатор' + '&db=' + element_select.val(),
                 method: 'GET',
                 success: function(data) {
                     updateIconConnection(data);
@@ -120,7 +120,7 @@
             var dataStr = '{"Пользователь": "' + $("#db-login").val() + '", "Пароль": "' + $("#db-password").val() + '"}';
 
             $.ajax({
-                url: urlAuthDB + '?cluster=657583b5-ec6b-4dc5-9043-2063a204db95&db=' + element_select.val(),
+                url: urlAuthDB + '?cluster=@Model.Кластер_Идентификатор' + '&db=' + element_select.val(),
                 method: 'POST',
                 data: dataStr,
                 success: function(data) {
