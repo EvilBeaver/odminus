@@ -5,7 +5,7 @@
             <p style="margin-top: 5px;">Информационная база:</p>
         </div>
         <div class="cell-3">
-            <form action='' method="post" id="session_list_update">
+            <form action='' method="post" id="data_list_update">
                 <select id="select_infobase" data-role="select">
                     <option value="0"></option>
                     @foreach(var ИнфоБаза in Model.СписокИнформационныхБаз) {
@@ -26,10 +26,8 @@
             <button class="button button-auth" onclick="infobaseAuth();">Авторизоваться</button>
         </div>
     </div>
-
-
     <div class="table-component">
-        <table id="session-list" class="table compact striped table-border mt-4" style="overflow-x:auto;" data-role="table"
+        <table id="data-list" class="table compact striped table-border mt-4" style="overflow-x:auto;" data-role="table"
                 data-cls-table-top="row flex-nowrap" 
                 data-cls-search="cell-md-8"
                 data-cls-rows-count="cell-md-4"
@@ -39,14 +37,10 @@
                 data-on-data-loaded="$('#activity').hide()">
         </table>
     </div>
-
-
     <div class="d-flex flex-justify-center">
         <div id="activity" data-role="activity" data-type="cycle" data-style="color" style="display: none"></div>
     </div>
-
 </div>
-
 <div class="dialog" data-role="dialog">
     <div class="dialog-title">Авторизация в информационной базе</div>
     <div class="dialog-content">
@@ -60,9 +54,9 @@
         <button class="button dialog-btn-cancel">Отмена</button>
     </div>
 </div>
-
 <!-- Надо перенести в отдельный файл js -->
 <script>
+    
     var urlAuthDB = '@Url.RouteUrl(new { controller = "infobase", action = "auth"})';
     var element_select = getSelectDB();
     element_select.on('change', function(){
@@ -87,7 +81,6 @@
             reloadList();
         }    
     });
-
 
     function updateIconConnection(result){
         $('.connection').removeClass('connection-off').removeClass('connection-on');
@@ -145,7 +138,7 @@
             $.ajax({
                 url: '',
                 success: function(data) {
-                    $('#session-list').data('table').loadData(
+                    $('#data-list').data('table').loadData(
                         '@Url.Action("GetModelDataList")' 
                         + '?cluster=@Model.Кластер_Идентификатор' 
                         + '&db=' + thisSelect, 
@@ -157,7 +150,7 @@
             $.ajax({
                 url: '',
                 success: function(data) {
-                    $('#session-list').data('table').loadData(
+                    $('#data-list').data('table').loadData(
                         '@Url.Action("GetModelDataList")' 
                         + '?cluster=' + '@Model.Кластер_Идентификатор'
                         + '&empty=true');
@@ -169,5 +162,4 @@
     function getSelectDB(){
         return $('#select_infobase');    
     }
-
 </script>
