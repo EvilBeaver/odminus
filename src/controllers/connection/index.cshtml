@@ -26,8 +26,6 @@
             <button class="button button-auth" onclick="authInInfobase();">Авторизоваться</button>
         </div>
     </div>
-
-
     <div class="table-component">
         <table id="data-list" class="table compact striped table-border mt-4" style="overflow-x:auto;" data-role="table"
                 data-cls-table-top="row flex-nowrap" 
@@ -39,14 +37,12 @@
                 data-on-data-loaded="$('#activity').hide()">
         </table>
     </div>
-
-
     <div class="d-flex flex-justify-center">
         <div id="activity" data-role="activity" data-type="cycle" data-style="color" style="display: none"></div>
     </div>
-
 </div>
 
+<!-- TODO: перенести в component -->
 <div class="dialog" data-role="dialog">
     <div class="dialog-title">Авторизация в информационной базе</div>
     <div class="dialog-content">
