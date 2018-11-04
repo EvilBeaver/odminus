@@ -61,14 +61,16 @@
 <script>
     var urlAuthDB = '@Url.RouteUrl(new { controller = "infobase", action = "auth"})';
     var element_select = logicDataList.getItem_SelectDB();
-    
-    element_select.on('change', logicDataList.selectDbOnChange(element_select, urlAuthDB, '@Model.Кластер_Идентификатор')); 
-    
-    function authInInfobase(){
+
+    element_select.on('change', function () {
+        logicDataList.selectDbOnChange(element_select, urlAuthDB, '@Model.Кластер_Идентификатор');
+    });
+
+    function authInInfobase() {
         logicDataList.authInInfobase(element_select, urlAuthDB, '@Model.Кластер_Идентификатор');
     }
-   
-    function reloadList(){
+
+    function reloadList() {
         logicDataList.reloadList(element_select, '@Url.Action("GetModelDataList")', '@Model.Кластер_Идентификатор');
     }
 </script>

@@ -5,7 +5,7 @@
             <p style="margin-top: 5px;">Информационная база:</p>
         </div>
         <div class="cell-3">
-            <form action='' method="post" id="session_list_update">
+            <form action='' method="post" id="data_list_update">
                 <select id="select_infobase" data-role="select">
                     <option value="0"></option>
                     @foreach(var ИнфоБаза in Model.СписокИнформационныхБаз) {
@@ -23,13 +23,13 @@
             <i class="fas fa-plug connection connection-off"></i>
         </div>
         <div class="cell-2">
-            <button class="button button-auth" onclick="infobaseAuth();">Авторизоваться</button>
+            <button class="button button-auth" onclick="authInInfobase();">Авторизоваться</button>
         </div>
     </div>
 
 
     <div class="table-component">
-        <table id="session-list" class="table compact striped table-border mt-4" style="overflow-x:auto;" data-role="table"
+        <table id="data-list" class="table compact striped table-border mt-4" style="overflow-x:auto;" data-role="table"
                 data-cls-table-top="row flex-nowrap" 
                 data-cls-search="cell-md-8"
                 data-cls-rows-count="cell-md-4"
@@ -61,115 +61,20 @@
     </div>
 </div>
 
-<!-- Надо перенести в отдельный файл js -->
+<!-- TODO: Надо перенести в отдельный файл js -->
 <script>
     var urlAuthDB = '@Url.RouteUrl(new { controller = "infobase", action = "auth"})';
-    var element_select = getSelectDB();
-    element_select.on('change', function(){
-        if(element_select.attr('ready') =='true')
-        {    
-            $('#activity').show();
-            $.ajax({
-                url: urlAuthDB + '?cluster=@Model.Кластер_Идентификатор' + '&db=' + element_select.val(),
-                method: 'GET',
-                success: function(data) {
-                    updateIconConnection(data);
-                    //console.log(data);
-                    reloadList();
-                },
-                error: function (request, status, error){
-                    updateIconConnection('error');
-                    //console.log(request);
-                    reloadList();
-                }
-            });
-        }
-        else{
-            element_select.attr('ready', 'true');   
-            reloadList();
-        }    
+    var element_select = logicDataList.getItem_SelectDB();
+
+    element_select.on('change', function () {
+        logicDataList.selectDbOnChange(element_select, urlAuthDB, '@Model.Кластер_Идентификатор');
     });
 
-
-    function updateIconConnection(result){
-        $('.connection').removeClass('connection-off').removeClass('connection-on');
-        if (result == 'Ok'){
-            $('.connection').addClass('connection-on');
-            $('.button-auth').css('display', 'none');
-        }
-        else{
-            $('.connection').addClass('connection-off');
-            $('.button-auth').css('display', 'block');
-        }
-        $('#activity').hide();
+    function authInInfobase() {
+        logicDataList.authInInfobase(element_select, urlAuthDB, '@Model.Кластер_Идентификатор');
     }
 
-    function infobaseAuth(){
-        var dialog = $('.dialog'); 
-        dialog.find('div.dialog-actions > button.dialog-btn-access').click(function(){
-            Metro.dialog.close(dialog);
-
-            $('#activity').show();
-
-            // Почему-то не парсится
-            var dataAuth = {
-                Пользователь: $("#db-login").val(),
-                Пароль: $("#db-password").val()
-            };
-
-            var dataStr = '{"Пользователь": "' + $("#db-login").val() + '", "Пароль": "' + $("#db-password").val() + '"}';
-
-            $.ajax({
-                url: urlAuthDB + '?cluster=@Model.Кластер_Идентификатор' + '&db=' + element_select.val(),
-                method: 'POST',
-                data: dataStr,
-                success: function(data) {
-                    updateIconConnection(data);   
-                    reloadList();
-                }, 
-                error: function (request, status, error) {
-                    updateIconConnection('error'); 
-                    reloadList();  
-                }
-            });
-
-        });
-        dialog.find('div.dialog-actions > button.dialog-btn-cancel').click(function(){
-            Metro.dialog.close(dialog);
-        });
-        Metro.dialog.open(dialog);
+    function reloadList() {
+        logicDataList.reloadList(element_select, '@Url.Action("GetModelDataList")', '@Model.Кластер_Идентификатор');
     }
-
-    function reloadList(){
-        $('#activity').show();
-        var thisSelect = element_select.val();
-        if ($('.connection').hasClass('connection-on')){
-            $.ajax({
-                url: '',
-                success: function(data) {
-                    $('#session-list').data('table').loadData(
-                        '@Url.Action("GetSessionData")' 
-                        + '?cluster=@Model.Кластер_Идентификатор' 
-                        + '&db=' + thisSelect, 
-                        true);
-                }
-            });
-        }
-        else {
-            $.ajax({
-                url: '',
-                success: function(data) {
-                    $('#session-list').data('table').loadData(
-                        '@Url.Action("GetSessionData")' 
-                        + '?cluster=' + thisSelect 
-                        + '&empty=true');
-                }
-            });
-        }
-    }
-
-    function getSelectDB(){
-        return $('#select_infobase');    
-    }
-
 </script>
