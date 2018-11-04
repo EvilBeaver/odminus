@@ -23,7 +23,7 @@
             <i class="fas fa-plug connection connection-off"></i>
         </div>
         <div class="cell-2">
-            <button class="button button-auth" onclick="infobaseAuth();">Авторизоваться</button>
+            <button class="button button-auth" onclick="authInInfobase();">Авторизоваться</button>
         </div>
     </div>
     <div class="table-component">
@@ -41,6 +41,8 @@
         <div id="activity" data-role="activity" data-type="cycle" data-style="color" style="display: none"></div>
     </div>
 </div>
+
+<!-- TODO: перенести в component -->
 <div class="dialog" data-role="dialog">
     <div class="dialog-title">Авторизация в информационной базе</div>
     <div class="dialog-content">
@@ -54,112 +56,19 @@
         <button class="button dialog-btn-cancel">Отмена</button>
     </div>
 </div>
-<!-- Надо перенести в отдельный файл js -->
+
+<!-- TODO: Надо перенести в отдельный файл js -->
 <script>
-    
     var urlAuthDB = '@Url.RouteUrl(new { controller = "infobase", action = "auth"})';
-    var element_select = getSelectDB();
-    element_select.on('change', function(){
-        if(element_select.attr('ready') =='true')
-        {    
-            $('#activity').show();
-            $.ajax({
-                url: urlAuthDB + '?cluster=@Model.Кластер_Идентификатор' + '&db=' + element_select.val(),
-                method: 'GET',
-                success: function(data) {
-                    updateIconConnection(data);
-                    reloadList();
-                },
-                error: function (request, status, error){
-                    updateIconConnection('error');
-                    reloadList();
-                }
-            });
-        }
-        else{
-            element_select.attr('ready', 'true');   
-            reloadList();
-        }    
-    });
-
-    function updateIconConnection(result){
-        $('.connection').removeClass('connection-off').removeClass('connection-on');
-        if (result == 'Ok'){
-            $('.connection').addClass('connection-on');
-            $('.button-auth').css('display', 'none');
-        }
-        else{
-            $('.connection').addClass('connection-off');
-            $('.button-auth').css('display', 'block');
-        }
-        $('#activity').hide();
+    var element_select = logicDataList.getItem_SelectDB();
+    
+    element_select.on('change', logicDataList.selectDbOnChange(element_select, urlAuthDB, '@Model.Кластер_Идентификатор')); 
+    
+    function authInInfobase(){
+        logicDataList.authInInfobase(element_select, urlAuthDB, '@Model.Кластер_Идентификатор');
     }
-
-    function infobaseAuth(){
-        var dialog = $('.dialog'); 
-        dialog.find('div.dialog-actions > button.dialog-btn-access').click(function(){
-            Metro.dialog.close(dialog);
-
-            $('#activity').show();
-
-            // Почему-то не парсится
-            var dataAuth = {
-                Пользователь: $("#db-login").val(),
-                Пароль: $("#db-password").val()
-            };
-
-            var dataStr = '{"Пользователь": "' + $("#db-login").val() + '", "Пароль": "' + $("#db-password").val() + '"}';
-
-            $.ajax({
-                url: urlAuthDB + '?cluster=@Model.Кластер_Идентификатор' + '&db=' + element_select.val(),
-                method: 'POST',
-                data: dataStr,
-                success: function(data) {
-                    updateIconConnection(data);   
-                    reloadList();
-                }, 
-                error: function (request, status, error) {
-                    updateIconConnection('error'); 
-                    reloadList();  
-                }
-            });
-
-        });
-        dialog.find('div.dialog-actions > button.dialog-btn-cancel').click(function(){
-            Metro.dialog.close(dialog);
-        });
-        Metro.dialog.open(dialog);
-    }
-
+   
     function reloadList(){
-        $('#activity').show();
-        var thisSelect = element_select.val();
-        if ($('.connection').hasClass('connection-on')){
-            $.ajax({
-                url: '',
-                success: function(data) {
-                    $('#data-list').data('table').loadData(
-                        '@Url.Action("GetModelDataList")' 
-                        + '?cluster=@Model.Кластер_Идентификатор' 
-                        + '&db=' + thisSelect, 
-                        true);
-                }
-            });
-        }
-        else {
-            $.ajax({
-                url: '',
-                success: function(data) {
-                    $('#data-list').data('table').loadData(
-                        '@Url.Action("GetModelDataList")' 
-                        + '?cluster=' + '@Model.Кластер_Идентификатор'
-                        + '&empty=true');
-                }
-            });
-        }
-    }
-
-    function getSelectDB(){
-        return $('#select_infobase');    
+        logicDataList.reloadList(element_select, '@Url.Action("GetModelDataList")', '@Model.Кластер_Идентификатор');
     }
 </script>
