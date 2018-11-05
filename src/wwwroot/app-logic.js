@@ -47,8 +47,9 @@ var logicDataList = {
 
     authInInfobase: function (element_select, urlRequest, clusterId) {
         var dialog = $('.dialog');
+        var selectorActionAccess = 'div.dialog-actions > button.dialog-btn-access';
         dialog.removeClass('no-visible');
-        dialog.find('div.dialog-actions > button.dialog-btn-access').click(function () {
+        dialog.find(selectorActionAccess).click(function () {
             Metro.dialog.close(dialog);
 
             $('#activity').show();
@@ -79,6 +80,14 @@ var logicDataList = {
         dialog.find('div.dialog-actions > button.dialog-btn-cancel').click(function () {
             Metro.dialog.close(dialog);
         });
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) {
+                Metro.dialog.close(dialog);
+            }
+            else if (e.keyCode == 13){
+                dialog.find(selectorActionAccess).click();
+            }
+       });
         Metro.dialog.open(dialog);
     },
 
@@ -103,5 +112,4 @@ var logicDataList = {
             reloadList();
         }
     }
-
 }
