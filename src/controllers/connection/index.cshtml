@@ -42,20 +42,7 @@
     </div>
 </div>
 
-<!-- TODO: перенести в component -->
-<div class="dialog" data-role="dialog">
-    <div class="dialog-title">Авторизация в информационной базе</div>
-    <div class="dialog-content">
-        <p>Пользователь</p>
-        <input id='db-login'type="text" data-history="false" data-role="input" autocomplete='off'> 
-        <p>Пароль</p>
-        <input id='db-password' type="password" data-role="input" autocomplete="new-password">   
-    </div>
-    <div class="dialog-actions text-right">
-        <button class="button primary dialog-btn-access">Подтвердить</button>
-        <button class="button dialog-btn-cancel">Отмена</button>
-    </div>
-</div>
+@await Component.InvokeAsync("formauth")
 
 <!-- TODO: Надо перенести в отдельный файл js -->
 <script>
