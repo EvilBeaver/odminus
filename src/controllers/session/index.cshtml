@@ -27,7 +27,6 @@
         </div>
     </div>
 
-
     <div class="table-component">
         <table id="data-list" class="table compact striped table-border mt-4" style="overflow-x:auto;" data-role="table"
                 data-cls-table-top="row flex-nowrap" 
@@ -64,4 +63,32 @@
     function reloadList() {
         logicDataList.reloadList(element_select, '@Url.Action("GetModelDataList")', '@Model.Кластер_Идентификатор');
     }
+
+    function action_terminate(element){
+        $('#activity').show();
+        $.ajax({
+            url: '@Url.Action("CloseSession")' + '?cluster=' + '@Model.Кластер_Идентификатор' + '&db=' + element_select.val() + '&session=' + $(element).attr('data-id'),
+            method: 'POST',
+            success: function (data) {
+                if (data == 'ok')
+                {
+                    reloadList();
+                }
+                else if (data == 'data-not-found'){
+                    reloadList();
+                }
+                else {
+                    var toast = Metro.toast.create;
+                    toast(data);
+                }
+                $('#activity').hide();
+            },
+            error: function (request, status, error) {
+                var toast = Metro.toast.create;
+                toast('Действие не выполнено');
+                $('#activity').hide();
+            }
+        });
+    }
+
 </script>

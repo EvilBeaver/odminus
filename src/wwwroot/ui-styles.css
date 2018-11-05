@@ -72,3 +72,7 @@ a.hint.compact {
 h2.title-page {
     margin-bottom: 20px;
 }
+
+.list-action {
+    margin-bottom: 7px !important;
+}

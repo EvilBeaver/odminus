@@ -111,6 +111,14 @@ var logicDataList = {
             element_select.attr('ready', 'true');
             reloadList();
         }
+    },
+
+    getButtonListAction: function (){
+        return $('.table-component').find('button.list-action');
+    },
+
+    getValueItemForButtonAction: function (btn){
+        
     }
 
 }
