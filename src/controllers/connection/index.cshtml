@@ -60,4 +60,35 @@
     function reloadList() {
         logicDataList.reloadList(element_select, '@Url.Action("GetModelDataList")', '@Model.Кластер_Идентификатор');
     }
+
+    function action_terminate(element){
+        $('#activity').show();
+        $.ajax({
+            //url: '@Url.Action("CloseConnection")' + '?cluster=' + '@Model.Кластер_Идентификатор' + '&db=' + element_select.val() + '&connection=' + $(element).attr('data-id'),
+            url: '',
+            method: 'POST',
+            success: function (data) {
+                //if (data == 'ok')
+                //{
+                //    reloadList();
+                //}
+                //else if (data == 'data-not-found'){
+                //    reloadList();
+                //}
+                //else {
+                //    var toast = Metro.toast.create;
+                //    toast(data);
+                //}
+                var toast = Metro.toast.create;
+                toast('В разработке');
+                $('#activity').hide();
+            },
+            error: function (request, status, error) {
+                var toast = Metro.toast.create;
+                toast('Действие не выполнено');
+                $('#activity').hide();
+            }
+        });
+    }
+
 </script>
