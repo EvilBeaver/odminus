@@ -47,6 +47,7 @@ var logicDataList = {
 
     authInInfobase: function (element_select, urlRequest, clusterId) {
         var dialog = $('.dialog');
+        dialog.removeClass('no-visible');
         dialog.find('div.dialog-actions > button.dialog-btn-access').click(function () {
             Metro.dialog.close(dialog);
 
