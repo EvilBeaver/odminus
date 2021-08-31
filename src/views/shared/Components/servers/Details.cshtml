@@ -1,0 +1,33 @@
+<table class="table">
+    @foreach (var server in Model.serverList)
+    {
+        <tr>
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Адрес</th>
+                    <th>Порт</th>
+                </tr>
+            </thead>
+            <td>
+                <a asp-route-agent="@ViewContext.RouteData.Values["agent"]" asp-controller="server" asp-action="edit"
+                asp-route-cluster="@Model.clusterId" asp-route-id="@server.Ид()"><span
+                    class="mif-database fg-blue"></span> @server.Имя()
+                </a>
+            </td>
+            <td>
+                @server.АдресСервера()
+            </td>
+            <td>
+                @server.ПортСервера()
+            </td>
+            <td>
+                <ul class="inline-list">
+                    <li><a class="button">
+                            Кнопка1
+                        </a></li>
+                </ul>
+            </td>
+        </tr>
+    }
+</table>
