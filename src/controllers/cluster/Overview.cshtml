@@ -12,8 +12,9 @@
     @await Component.InvokeAsync("databases",new {mode = "overview", cluster = Model})
 </p>
 
-<p class="divided">
+<p class="mt-3 mb-2">
     <strong>Рабочие серверы</strong>
+    @await Component.InvokeAsync("servers",new {mode = "overview", cluster = Model})
 </p>
 
 <p class="divided">

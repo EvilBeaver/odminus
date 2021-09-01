@@ -71,8 +71,8 @@
         <label class="cell-sm-2" for="РежимРаспределенияНагрузки">Распределение нагрузки</label>
         <div class="cell-sm-6">
             <select name="РежимРаспределенияНагрузки">
-                <!option @optionSelected("ПоПамяти",@Model?.Получить("УровеньОтказоустойчивости", false))>По памяти</!option>
-                <!option @optionSelected("ПоПроизводительности",@Model?.Получить("УровеньОтказоустойчивости", false))>По производительности</!option>
+                <!option @optionSelected("ПоПамяти", @Model?.Получить("УровеньОтказоустойчивости", false).ToString())>По памяти</!option>
+                <!option @optionSelected("ПоПроизводительности",@Model?.Получить("УровеньОтказоустойчивости", false).ToString())>По производительности</!option>
             </select>
         </div>
     </div>

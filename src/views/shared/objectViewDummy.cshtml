@@ -8,7 +8,7 @@
 
     <div asp-validation-summary="All"></div>
 
-    @foreach(var p in @Model.ПараметрыОбъекта("ИмяПараметра")) {
+    @foreach(var p in @Model.ПараметрыОбъекта().ОписаниеСвойств()) {
         <div class="row mb-2">
             <label class="cell-sm-2" for="@p.Ключ">@Synonym(p.Ключ)</label>
             <div class="cell-sm-6">

@@ -1,0 +1,11 @@
+
+<ul class="inline-list">
+@foreach(var server in Model.ServerList) {
+    <li><a 
+        asp-route-agent="@ViewContext.RouteData.Values["agent"]" 
+        asp-controller="server"
+        asp-action="edit"
+        asp-route-cluster="@Model.clusterId"
+        asp-route-id="@server.ИД()"><span class="mif-database fg-blue"></span> @server.Имя()</a></li>
+}
+</ul>
